@@ -1,0 +1,4 @@
+rootProject.name = 'UniCine'
+include 'src'
+include 'negocio'
+
