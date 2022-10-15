@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -25,6 +24,16 @@ public class Funcion implements Serializable{
     @PositiveOrZero
     @Column(nullable = false)
     private String precio;
+    @ManyToOne
+    private Sala sala;
+    @ManyToOne
+    private HorarioPelicula horarioPelicula;
+
+    @OneToMany(mappedBy="funcion")
+    private List<Compra> comprasF;
+
+    @ManyToOne
+    private Pelicula pelicula;
 
     @Override
     public boolean equals(Object o) {

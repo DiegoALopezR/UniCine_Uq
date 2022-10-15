@@ -1,12 +1,10 @@
 package co.edu.uniquindio.unicine.entidades;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -20,26 +18,29 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class AdministradorTeatro implements Serializable {
+public class Foro implements Serializable {
 
     @Id
     private String codigo;
-    @Column(nullable = false)
-    private String correo;
-    @Column(nullable = false)
-    private String password;
+    private String respuesta;
+    private String pregunta;
 
-    @OneToMany(mappedBy="administradorTeatro")
-    private List<Teatro> teatros;
+    @OneToMany(mappedBy="foro")
+    private List<Cliente> clientes;
+
+    @OneToMany(mappedBy="foroP")
+    private List<Pelicula> peliculas;
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AdministradorTeatro that = (AdministradorTeatro) o;
+        Foro foro = (Foro) o;
 
-        return Objects.equals(codigo, that.codigo);
+        return Objects.equals(codigo, foro.codigo);
     }
 
     @Override
@@ -49,10 +50,10 @@ public class AdministradorTeatro implements Serializable {
 
     @Override
     public String toString() {
-        return "AdministradorTeatro{" +
+        return "Foro{" +
                 "codigo='" + codigo + '\'' +
-                ", correo='" + correo + '\'' +
-                ", password='" + password + '\'' +
+                ", respuesta='" + respuesta + '\'' +
+                ", pregunta='" + pregunta + '\'' +
                 '}';
     }
 }

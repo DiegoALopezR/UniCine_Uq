@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.util.Objects;
@@ -28,6 +29,12 @@ public class CompraConfiteria implements Serializable {
     @PositiveOrZero
     @Column(nullable = false)
     private String unidades;
+
+    @ManyToOne
+    private Confiteria confiteria;
+
+    @ManyToOne
+    private Compra compraConfi;
 
     @Override
     public boolean equals(Object o) {

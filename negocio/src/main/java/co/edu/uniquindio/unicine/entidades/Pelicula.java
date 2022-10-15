@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.security.PrivateKey;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -31,6 +31,17 @@ public class Pelicula implements Serializable {
     @Column(nullable = false)
     private String estado;
     private String reparto;
+
+    @OneToMany(mappedBy="pelicula")
+    private List<Funcion> funciones;
+    @ManyToOne
+    private Foro foroP;
+
+    @OneToMany(mappedBy="pelicula")
+    private List<Puntuacion> puntuaciones;
+
+    @ManyToMany(mappedBy = "peliculas")
+    private List<Genero> generos; 
 
     @Override
     public boolean equals(Object o) {

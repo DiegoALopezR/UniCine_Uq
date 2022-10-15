@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -24,6 +23,13 @@ public class Sala implements Serializable{
     private String codigo;
     @Column(nullable = false)
     private String nombre;
+    @ManyToOne
+    private Teatro teatro;
+
+    @OneToMany(mappedBy="sala")
+    private List<Funcion> funciones;
+    @ManyToOne
+    private DistribucionSillas distribucionSillas;
 
     @Override
     public boolean equals(Object o) {

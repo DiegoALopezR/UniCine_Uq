@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,6 +21,9 @@ public class Telefono implements Serializable{
 
     @Id
     private String numero;
+
+    @ManyToOne
+    private Cliente clienteT;
 
     @Override
     public boolean equals(Object o) {

@@ -8,8 +8,10 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -28,6 +30,9 @@ public class Confiteria implements Serializable {
     @Column(nullable = false)
     private String precio;
     private String url_Imagen;
+
+    @OneToMany(mappedBy="confiteria")
+    private List<CompraConfiteria> compraConfiteria;
 
     @Override
     public boolean equals(Object o) {

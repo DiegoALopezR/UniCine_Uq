@@ -8,7 +8,9 @@ import lombok.Setter;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -24,6 +26,9 @@ public class Genero implements Serializable {
     private String codigo;
     @ElementCollection
     private Map<String, String> nombres;
+
+    @ManyToMany
+    private List<Pelicula> peliculas;
 
     @Override
     public boolean equals(Object o) {

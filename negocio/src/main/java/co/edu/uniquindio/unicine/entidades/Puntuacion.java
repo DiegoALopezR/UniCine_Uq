@@ -1,17 +1,14 @@
 package co.edu.uniquindio.unicine.entidades;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -20,24 +17,23 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class AdministradorTeatro implements Serializable {
+public class Puntuacion implements Serializable {
 
     @Id
     private String codigo;
-    @Column(nullable = false)
-    private String correo;
-    @Column(nullable = false)
-    private String password;
+    private String puntuacion;
+    @ManyToOne
+    private Cliente clienteP;
 
-    @OneToMany(mappedBy="administradorTeatro")
-    private List<Teatro> teatros;
+    @ManyToOne
+    private Pelicula pelicula;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AdministradorTeatro that = (AdministradorTeatro) o;
+        Puntuacion that = (Puntuacion) o;
 
         return Objects.equals(codigo, that.codigo);
     }
@@ -49,10 +45,9 @@ public class AdministradorTeatro implements Serializable {
 
     @Override
     public String toString() {
-        return "AdministradorTeatro{" +
+        return "Puntuacion{" +
                 "codigo='" + codigo + '\'' +
-                ", correo='" + correo + '\'' +
-                ", password='" + password + '\'' +
+                ", puntuacion='" + puntuacion + '\'' +
                 '}';
     }
 }

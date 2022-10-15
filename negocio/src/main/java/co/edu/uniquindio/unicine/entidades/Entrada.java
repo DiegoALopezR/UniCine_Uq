@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.Objects;
 
@@ -27,6 +28,9 @@ public class Entrada {
     @PositiveOrZero
     @Column(nullable = false)
     private String columna;
+
+    @ManyToOne
+    private Compra compra;
 
     @Override
     public boolean equals(Object o) {

@@ -8,7 +8,9 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -23,6 +25,9 @@ public class Ciudad implements Serializable{
     private String codigo;
     @Column(nullable = false)
     private String nombre;
+
+    @OneToMany(mappedBy="ciudad")
+    private List<Teatro> teatros;
 
     @Override
     public boolean equals(Object o) {

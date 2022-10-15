@@ -8,9 +8,11 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -31,6 +33,9 @@ public class HorarioPelicula implements Serializable{
     private LocalDateTime fecha_inicio;
     @Column(nullable = false)
     private LocalDateTime fecha_fin;
+
+    @OneToMany(mappedBy="horarioPelicula")
+    private List<Funcion> funciones;
 
     @Override
     public boolean equals(Object o) {

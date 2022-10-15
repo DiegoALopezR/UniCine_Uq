@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -32,6 +30,19 @@ public class Compra implements Serializable {
     @Column(nullable = false )
     private String precio_total;
 
+    @OneToOne(mappedBy="compra")
+    private CuponCliente cuponCliente;
+
+    @OneToMany(mappedBy="compra")
+    private List<Entrada> entradas;
+
+    @OneToMany(mappedBy="compraConfi")
+    private List<CompraConfiteria> compraConfiteria;
+    @ManyToOne
+    private Cliente cliente;
+    @ManyToOne
+    private Funcion funcion;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,7 +62,7 @@ public class Compra implements Serializable {
     public String toString() {
         return "Compra{" +
                 "codigo='" + codigo + '\'' +
-                ", medi_Pago='" + medio_Pago + '\'' +
+                ", medio_Pago='" + medio_Pago + '\'' +
                 ", fecha_compra=" + fecha_compra +
                 ", precio_total='" + precio_total + '\'' +
                 '}';

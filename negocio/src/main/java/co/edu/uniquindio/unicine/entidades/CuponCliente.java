@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -23,6 +22,12 @@ public class CuponCliente implements Serializable {
     private String codigo;
     @Column(nullable = false)
     private String estado;
+    @ManyToOne
+    private Cupon cupon;
+    @ManyToOne
+    private Cliente clienteCupon;
+    @OneToOne
+    private Compra compra;
 
     @Override
     public boolean equals(Object o) {
@@ -41,7 +46,7 @@ public class CuponCliente implements Serializable {
 
     @Override
     public String toString() {
-        return "cuponCliente{" +
+        return "CuponCliente{" +
                 "codigo='" + codigo + '\'' +
                 ", estado='" + estado + '\'' +
                 '}';
