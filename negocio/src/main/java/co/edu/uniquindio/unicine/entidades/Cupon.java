@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
 
 import lombok.*;
@@ -16,14 +16,14 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Cupon implements Serializable {
 
+    //FK
     @Id
     private String codigo;
-    @PositiveOrZero
+    @PositiveOrZero //why?
     @Column(nullable = false, length = 200)
     private String descripcion;
     @PositiveOrZero
@@ -32,10 +32,21 @@ public class Cupon implements Serializable {
     @Column(nullable = false)
     private String criterio;
     @Column(nullable = false)
-    private LocalDateTime fecha_vencimiento;
+    private LocalDateTime fechaVencimiento;
 
+    //FK
     @OneToMany(mappedBy="cupon")
     private List<CuponCliente> cuponCliente;
+
+    public Cupon(String codigo, String descripcion, String descuento, String criterio, LocalDateTime fechaVencimiento)
+    {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.descuento = descuento;
+        this.criterio = criterio;
+        this.fechaVencimiento = fechaVencimiento;
+
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -59,7 +70,7 @@ public class Cupon implements Serializable {
                 ", descripcion='" + descripcion + '\'' +
                 ", descuento='" + descuento + '\'' +
                 ", criterio='" + criterio + '\'' +
-                ", fecha_vencimiento=" + fecha_vencimiento +
+                ", fecha_vencimiento=" + fechaVencimiento +
                 '}';
     }
 }

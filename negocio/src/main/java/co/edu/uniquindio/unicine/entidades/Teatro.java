@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,11 +12,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Teatro implements Serializable {
 
+    //PK
     @Id
     private String codigo;
     @Column(nullable = false)
@@ -29,8 +28,18 @@ public class Teatro implements Serializable {
     @ManyToOne
     private AdministradorTeatro administradorTeatro;
 
+    //FK
     @OneToMany(mappedBy="teatro")
     private List<Sala> salas;
+
+    public Teatro(String codigo, String direccion, String telefono, Ciudad ciudad, AdministradorTeatro administradorTeatro)
+    {
+        this.codigo = codigo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.ciudad = ciudad;
+        this.administradorTeatro = administradorTeatro;
+    }
 
     @Override
     public boolean equals(Object o) {

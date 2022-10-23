@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,33 +14,45 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Compra implements Serializable {
 
+   //PK
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String codigo;
     @Column(nullable = false )
-    private String medio_Pago;
+    private MedioPago medioPago;
     @Column(nullable = false )
-    private LocalDateTime fecha_compra;
+    private LocalDateTime fechaCompra;
     @PositiveOrZero
     @Column(nullable = false )
-    private String precio_total;
+    private String precioTotal;
 
-    @OneToOne(mappedBy="compra")
-    private CuponCliente cuponCliente;
-
+    //FK
     @OneToMany(mappedBy="compra")
     private List<Entrada> entradas;
 
+   //FK
     @OneToMany(mappedBy="compraConfi")
     private List<CompraConfiteria> compraConfiteria;
     @ManyToOne
     private Cliente cliente;
     @ManyToOne
     private Funcion funcion;
+
+    @OneToOne
+    private CuponCliente clienteCupon;
+
+    public Compra(MedioPago medioPago, Cliente cliente, Funcion funcion)
+    {
+        this.medioPago = medioPago;
+        this.cliente = cliente;
+        this.funcion = funcion;
+        this.fechaCompra =LocalDateTime.now();
+
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -62,9 +73,9 @@ public class Compra implements Serializable {
     public String toString() {
         return "Compra{" +
                 "codigo='" + codigo + '\'' +
-                ", medio_Pago='" + medio_Pago + '\'' +
-                ", fecha_compra=" + fecha_compra +
-                ", precio_total='" + precio_total + '\'' +
+                ", medio_Pago='" + medioPago + '\'' +
+                ", fecha_compra=" + fechaCompra +
+                ", precio_total='" + precioTotal + '\'' +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,11 +13,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Funcion implements Serializable{
 
+    //PK
     @Id
     private String codigo;
     @PositiveOrZero
@@ -29,11 +28,21 @@ public class Funcion implements Serializable{
     @ManyToOne
     private HorarioPelicula horarioPelicula;
 
+    //FK
     @OneToMany(mappedBy="funcion")
     private List<Compra> comprasF;
 
     @ManyToOne
     private Pelicula pelicula;
+
+    public Funcion(String codigo, String precio, Sala sala, HorarioPelicula horarioPelicula, Pelicula pelicula)
+    {
+        this.codigo = codigo;
+        this.precio = precio;
+        this.sala = sala;
+        this.horarioPelicula = horarioPelicula;
+        this.pelicula = pelicula;
+    }
 
     @Override
     public boolean equals(Object o) {

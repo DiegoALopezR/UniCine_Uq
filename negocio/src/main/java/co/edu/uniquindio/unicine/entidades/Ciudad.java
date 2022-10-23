@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,21 +15,31 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
-public class Ciudad implements Serializable{
+public class Ciudad implements Serializable
+{
 
     @Id
     private String codigo;
     @Column(nullable = false)
     private String nombre;
 
+    //FK
     @OneToMany(mappedBy="ciudad")
     private List<Teatro> teatros;
 
+
+    public Ciudad(String codigo, String nombre)
+    {
+        this.codigo = codigo;
+        this.nombre = nombre;
+
+    }
+
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -45,7 +54,8 @@ public class Ciudad implements Serializable{
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Ciudad{" +
                 "codigo='" + codigo + '\'' +
                 ", nombre='" + nombre + '\'' +

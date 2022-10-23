@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,18 +16,18 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class DistribucionSillas implements Serializable {
 
+   //PK
     @Id
     private String codigo;
     @Column(nullable = false)
     private String esquema;
     @PositiveOrZero
     @Column(nullable = false)
-    private String total_sillas;
+    private String totalSillas;
     @PositiveOrZero
     @Column(nullable = false)
     private String filas;
@@ -36,8 +35,18 @@ public class DistribucionSillas implements Serializable {
     @Column(nullable = false)
     private String columnas;
 
+   //FK
     @OneToMany(mappedBy="distribucionSillas")
     private List<Sala> salas;
+
+    public DistribucionSillas(String codigo, String esquema, String totalSillas, String filas, String columnas)
+    {
+        this.codigo = codigo;
+        this.esquema = esquema;
+        this.totalSillas = totalSillas;
+        this.filas = filas;
+        this.columnas = columnas;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -59,7 +68,7 @@ public class DistribucionSillas implements Serializable {
         return "DistribucionSillas{" +
                 "codigo='" + codigo + '\'' +
                 ", esquema='" + esquema + '\'' +
-                ", total_sillas='" + total_sillas + '\'' +
+                ", total_sillas='" + totalSillas + '\'' +
                 ", filas='" + filas + '\'' +
                 ", columnas='" + columnas + '\'' +
                 '}';

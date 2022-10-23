@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,11 +16,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Confiteria implements Serializable {
 
+  //PK
     @Id
     private String codigo;
     @Column(nullable = false)
@@ -29,10 +28,20 @@ public class Confiteria implements Serializable {
     @PositiveOrZero
     @Column(nullable = false)
     private String precio;
-    private String url_Imagen;
+    private String urlImagen;
 
+    //FK
     @OneToMany(mappedBy="confiteria")
     private List<CompraConfiteria> compraConfiteria;
+
+    public Confiteria(String codigo, String nombre, String precio, String urlImagen)
+    {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.urlImagen = urlImagen;
+
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -55,7 +64,7 @@ public class Confiteria implements Serializable {
                 "codigo='" + codigo + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", precio='" + precio + '\'' +
-                ", url_Imagen='" + url_Imagen + '\'' +
+                ", url_Imagen='" + urlImagen + '\'' +
                 '}';
     }
 }

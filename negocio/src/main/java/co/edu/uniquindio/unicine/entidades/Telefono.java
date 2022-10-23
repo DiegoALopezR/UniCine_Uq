@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +19,7 @@ import java.util.Objects;
 
 public class Telefono implements Serializable{
 
+    //PK
     @Id
     private String numero;
 

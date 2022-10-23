@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
@@ -20,18 +21,26 @@ import java.util.Objects;
 
 public class Foro implements Serializable {
 
+   //PK
     @Id
     private String codigo;
     private String respuesta;
     private String pregunta;
 
+    //FK
     @OneToMany(mappedBy="foro")
     private List<Cliente> clientes;
 
-    @OneToMany(mappedBy="foroP")
-    private List<Pelicula> peliculas;
+    @ManyToOne
+    private Pelicula pelicula;
 
-
+    public Foro(String codigo, String respuesta, String pregunta, Pelicula pelicula)
+    {
+        this.codigo = codigo;
+        this.respuesta = respuesta;
+        this.pregunta = pregunta;
+        this.pelicula = pelicula;
+    }
 
     @Override
     public boolean equals(Object o) {

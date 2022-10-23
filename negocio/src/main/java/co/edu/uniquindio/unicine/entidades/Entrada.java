@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,11 +14,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Entrada {
 
+    //PK
     @Id
     private String codigo;
     @PositiveOrZero
@@ -31,6 +30,13 @@ public class Entrada {
 
     @ManyToOne
     private Compra compra;
+
+    public Entrada(String codigo, String fila, String columna)
+    {
+        this.codigo = codigo;
+        this.fila = fila;
+        this.columna = columna;
+    }
 
     @Override
     public boolean equals(Object o) {

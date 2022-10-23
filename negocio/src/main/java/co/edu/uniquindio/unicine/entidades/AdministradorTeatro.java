@@ -1,7 +1,6 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,11 +16,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class AdministradorTeatro implements Serializable {
 
+    //PK
     @Id
     private String codigo;
     @Column(nullable = false)
@@ -29,8 +28,16 @@ public class AdministradorTeatro implements Serializable {
     @Column(nullable = false)
     private String password;
 
+    //FK
     @OneToMany(mappedBy="administradorTeatro")
     private List<Teatro> teatros;
+
+    public AdministradorTeatro(String codigo, String correo, String password)
+    {
+        this.codigo = codigo;
+        this.correo = correo;
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object o) {

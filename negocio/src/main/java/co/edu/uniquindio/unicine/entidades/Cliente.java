@@ -1,6 +1,5 @@
-package co.edu.uniquindio.unicine.entidades;
+package co.edu.uniquindio.unicine.test.entidades;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,14 +12,14 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 
 public class Cliente implements Serializable {
 
+    //PK
     @Id
     private String cedula;
-    private String nombre_completo;
+    private String nombreCompleto;
     @Column(nullable = false, length = 35)
     private String email;
     @Column(nullable = false, length = 50)
@@ -29,23 +28,35 @@ public class Cliente implements Serializable {
     @Column(nullable = false)
     private String estado;
 
-    @ManyToOne
-    private Cliente cliente;
 
+    //FK
     @OneToMany(mappedBy="cliente")
     private List<Compra> compras;
 
+    //FK
     @OneToMany(mappedBy="clienteCupon")
     private List<CuponCliente> cuponClientes;
 
+    //FK
     @OneToMany(mappedBy="clienteP")
     private List<Puntuacion> puntuaciones;
 
+    //FK
     @OneToMany(mappedBy="clienteT")
     private List<Telefono> telefonos;
 
     @ManyToOne
     private Foro foro;
+
+    public Cliente(String cedula, String nombreCompleto, String email, String contrasena, String estado)
+    {
+        this.cedula = cedula;
+        this.nombreCompleto = nombreCompleto;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.estado = estado;
+
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -66,7 +77,7 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Cliente{" +
                 "cedula='" + cedula + '\'' +
-                ", nombre_completo='" + nombre_completo + '\'' +
+                ", nombre_completo='" + nombreCompleto + '\'' +
                 ", email='" + email + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", imagen='" + imagen + '\'' +
