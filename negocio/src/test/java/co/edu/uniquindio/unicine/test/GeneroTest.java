@@ -1,2 +1,6 @@
-package co.edu.uniquindio.unicine.test;public class GeneroTest {
+package co.edu.uniquindio.unicine.test;
+
+public class GeneroTest
+{
+
 }

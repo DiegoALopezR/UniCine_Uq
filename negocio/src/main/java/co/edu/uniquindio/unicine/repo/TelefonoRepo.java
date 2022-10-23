@@ -1,6 +1,6 @@
-package co.edu.uniquindio.unicine.test.repo;
+package co.edu.uniquindio.unicine.repo;
 
-import co.edu.uniquindio.unicine.test.entidades.Telefono;
+import co.edu.uniquindio.unicine.entidades.Telefono;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,10 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class AdministradorTeatro implements Serializable {
 
@@ -29,6 +31,7 @@ public class AdministradorTeatro implements Serializable {
     private String password;
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="administradorTeatro")
     private List<Teatro> teatros;
 

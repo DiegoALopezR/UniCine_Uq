@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 public enum MedioPago {
 

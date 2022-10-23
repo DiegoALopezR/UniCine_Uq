@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 
 import lombok.*;
@@ -17,6 +17,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class Cupon implements Serializable {
 
@@ -35,6 +36,7 @@ public class Cupon implements Serializable {
     private LocalDateTime fechaVencimiento;
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="cupon")
     private List<CuponCliente> cuponCliente;
 

@@ -1,8 +1,9 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class DistribucionSillas implements Serializable {
 
@@ -36,6 +38,7 @@ public class DistribucionSillas implements Serializable {
     private String columnas;
 
    //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="distribucionSillas")
     private List<Sala> salas;
 

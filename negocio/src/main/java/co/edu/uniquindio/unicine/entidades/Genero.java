@@ -1,8 +1,9 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class Genero implements Serializable {
 

@@ -1,2 +1,9 @@
-package co.edu.uniquindio.unicine.test;public class AdministradorTest {
+package co.edu.uniquindio.unicine.test;
+
+
+public class AdministradorTest
+{
+
+
+
 }

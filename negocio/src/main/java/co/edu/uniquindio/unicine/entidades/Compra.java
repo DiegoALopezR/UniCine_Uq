@@ -1,8 +1,9 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class Compra implements Serializable {
 
@@ -31,10 +33,12 @@ public class Compra implements Serializable {
     private String precioTotal;
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="compra")
     private List<Entrada> entradas;
 
    //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="compraConfi")
     private List<CompraConfiteria> compraConfiteria;
     @ManyToOne

@@ -5,11 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.PositiveOrZero;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -18,26 +16,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString
 
-public class Entrada {
+public class Sala implements Serializable{
 
     //PK
     @Id
     private String codigo;
-    @PositiveOrZero
     @Column(nullable = false)
-    private String fila;
-    @PositiveOrZero
-    @Column(nullable = false)
-    private String columna;
-
+    private String nombre;
     @ManyToOne
-    private Compra compra;
+    private Teatro teatro;
 
-    public Entrada(String codigo, String fila, String columna)
-    {
+    //FK
+    @ToString.Exclude
+    @OneToMany(mappedBy="sala")
+    private List<Funcion> funciones;
+    @ManyToOne
+    private DistribucionSillas distribucionSillas;
+
+    public Sala(String codigo, String nombre, Teatro teatro, DistribucionSillas distribucionSillas) {
         this.codigo = codigo;
-        this.fila = fila;
-        this.columna = columna;
+        this.nombre = nombre;
+        this.teatro = teatro;
+        this.distribucionSillas = distribucionSillas;
     }
 
     @Override
@@ -45,9 +45,9 @@ public class Entrada {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Entrada entrada = (Entrada) o;
+        Sala sala = (Sala) o;
 
-        return Objects.equals(codigo, entrada.codigo);
+        return Objects.equals(codigo, sala.codigo);
     }
 
     @Override
@@ -57,10 +57,9 @@ public class Entrada {
 
     @Override
     public String toString() {
-        return "Entrada{" +
+        return "Sala{" +
                 "codigo='" + codigo + '\'' +
-                ", fila='" + fila + '\'' +
-                ", columna='" + columna + '\'' +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
 }

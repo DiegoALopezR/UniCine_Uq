@@ -1,8 +1,9 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
@@ -14,6 +15,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class Funcion implements Serializable{
 
@@ -29,6 +31,7 @@ public class Funcion implements Serializable{
     private HorarioPelicula horarioPelicula;
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="funcion")
     private List<Compra> comprasF;
 

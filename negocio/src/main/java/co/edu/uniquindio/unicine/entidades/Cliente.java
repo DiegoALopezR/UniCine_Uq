@@ -1,8 +1,9 @@
-package co.edu.uniquindio.unicine.test.entidades;
+package co.edu.uniquindio.unicine.entidades;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString
 
 public class Cliente implements Serializable {
 
@@ -26,35 +28,38 @@ public class Cliente implements Serializable {
     private String contrasena;
     private String imagen;
     @Column(nullable = false)
-    private String estado;
+    private Integer estado;
 
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="cliente")
     private List<Compra> compras;
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="clienteCupon")
     private List<CuponCliente> cuponClientes;
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="clienteP")
     private List<Puntuacion> puntuaciones;
 
     //FK
+    @ToString.Exclude
     @OneToMany(mappedBy="clienteT")
     private List<Telefono> telefonos;
 
     @ManyToOne
     private Foro foro;
 
-    public Cliente(String cedula, String nombreCompleto, String email, String contrasena, String estado)
+    public Cliente(String cedula, String nombreCompleto, String email, String contrasena)
     {
         this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
         this.email = email;
         this.contrasena = contrasena;
-        this.estado = estado;
 
     }
 
@@ -73,16 +78,5 @@ public class Cliente implements Serializable {
         return cedula != null ? cedula.hashCode() : 0;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "cedula='" + cedula + '\'' +
-                ", nombre_completo='" + nombreCompleto + '\'' +
-                ", email='" + email + '\'' +
-                ", contrasena='" + contrasena + '\'' +
-                ", imagen='" + imagen + '\'' +
-                ", estado='" + estado + '\'' +
-                '}';
-    }
 }
 

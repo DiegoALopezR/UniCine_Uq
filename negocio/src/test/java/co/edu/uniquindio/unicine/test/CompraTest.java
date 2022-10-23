@@ -1,2 +1,6 @@
-package co.edu.uniquindio.unicine.test;public class CompraTest {
+package co.edu.uniquindio.unicine.test;
+
+public class CompraTest
+{
+
 }

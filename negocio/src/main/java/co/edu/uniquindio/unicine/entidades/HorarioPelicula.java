@@ -9,8 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,30 +20,32 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString
 
-public class Confiteria implements Serializable {
+public class HorarioPelicula implements Serializable{
 
-  //PK
+    //PK
     @Id
     private String codigo;
     @Column(nullable = false)
-    private String nombre;
-    @PositiveOrZero
+    private String dia;
     @Column(nullable = false)
-    private String precio;
-    private String urlImagen;
+    private String hora;
+    @Column(nullable = false)
+    private LocalDateTime fechaInicio;
+    @Column(nullable = false)
+    private LocalDateTime fechaFin;
 
     //FK
     @ToString.Exclude
-    @OneToMany(mappedBy="confiteria")
-    private List<CompraConfiteria> compraConfiteria;
+    @OneToMany(mappedBy="horarioPelicula")
+    private List<Funcion> funciones;
 
-    public Confiteria(String codigo, String nombre, String precio, String urlImagen)
+    public HorarioPelicula(String codigo, String dia, String hora, LocalDateTime fechaInicio, LocalDateTime fechaFin)
     {
         this.codigo = codigo;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.urlImagen = urlImagen;
-
+        this.dia = dia;
+        this.hora = hora;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class Confiteria implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Confiteria that = (Confiteria) o;
+        HorarioPelicula that = (HorarioPelicula) o;
 
         return Objects.equals(codigo, that.codigo);
     }
@@ -63,11 +65,12 @@ public class Confiteria implements Serializable {
 
     @Override
     public String toString() {
-        return "Confiteria{" +
+        return "HorarioPelicula{" +
                 "codigo='" + codigo + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", precio='" + precio + '\'' +
-                ", url_Imagen='" + urlImagen + '\'' +
+                ", dia='" + dia + '\'' +
+                ", hora='" + hora + '\'' +
+                ", fecha_inicio=" + fechaInicio +
+                ", fecha_fin=" + fechaFin +
                 '}';
     }
 }

@@ -1,2 +1,6 @@
-package co.edu.uniquindio.unicine.test;public class MedioPagoTest {
+package co.edu.uniquindio.unicine.test;
+
+public class MedioPagoTest
+{
+
 }

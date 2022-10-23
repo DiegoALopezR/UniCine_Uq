@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.PositiveOrZero;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
@@ -18,26 +19,30 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString
 
-public class Entrada {
+public class CompraConfiteria implements Serializable {
 
     //PK
     @Id
     private String codigo;
     @PositiveOrZero
-    @Column(nullable = false)
-    private String fila;
+    @Column(nullable = false )
+    private String precio;
     @PositiveOrZero
     @Column(nullable = false)
-    private String columna;
+    private String unidades;
 
     @ManyToOne
-    private Compra compra;
+    private Confiteria confiteria;
 
-    public Entrada(String codigo, String fila, String columna)
+    @ManyToOne
+    private Compra compraConfi;
+
+    public CompraConfiteria(String codigo, String precio, String unidades)
     {
         this.codigo = codigo;
-        this.fila = fila;
-        this.columna = columna;
+        this.precio = precio;
+        this.unidades = unidades;
+
     }
 
     @Override
@@ -45,9 +50,9 @@ public class Entrada {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Entrada entrada = (Entrada) o;
+        CompraConfiteria that = (CompraConfiteria) o;
 
-        return Objects.equals(codigo, entrada.codigo);
+        return Objects.equals(codigo, that.codigo);
     }
 
     @Override
@@ -57,10 +62,10 @@ public class Entrada {
 
     @Override
     public String toString() {
-        return "Entrada{" +
+        return "compraConfiteria{" +
                 "codigo='" + codigo + '\'' +
-                ", fila='" + fila + '\'' +
-                ", columna='" + columna + '\'' +
+                ", precio='" + precio + '\'' +
+                ", unidades='" + unidades + '\'' +
                 '}';
     }
 }
