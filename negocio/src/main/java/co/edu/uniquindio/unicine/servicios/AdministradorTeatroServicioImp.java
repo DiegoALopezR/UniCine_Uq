@@ -3,12 +3,14 @@ package co.edu.uniquindio.unicine.servicios;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
-public class AdministradorTeatroServicioImp
+@Service
+public abstract class AdministradorTeatroServicioImp implements AdministradorTeatroService
 {
 
     @Autowired
@@ -59,6 +61,11 @@ public class AdministradorTeatroServicioImp
     }
 
     @Override
+    public Teatro obtenerTeatro(Integer codigo) throws Exception {
+        return null;
+    }
+
+    @Override
     public Teatro obtenerTeatro(String codigo) throws Exception
     {
         Optional<Teatro> teatro = teatroRepo.findById(codigo);
@@ -87,6 +94,11 @@ public class AdministradorTeatroServicioImp
     }
 
     @Override
+    public void eliminarTeatros(Integer codigo) throws Exception {
+
+    }
+
+    @Override
     public void eliminarTeatros(String codigo) throws Exception
     {
 
@@ -105,9 +117,21 @@ public class AdministradorTeatroServicioImp
         return teatroRepo.findAll();
     }
 
+
+
+    @Override
+    public HorarioPelicula obtenerHorario(Integer codigo) throws Exception {
+        return null;
+    }
+
+    @Override
+    public HorarioPelicula crearHorarios2(HorarioPelicula horario) throws Exception {
+        return null;
+    }
+
     //---------------------------------CRUD DE HORARIOS-------------------------------------
     @Override
-    public Horario crearHorarios(Horario horario) throws Exception
+    public HorarioPelicula crearHorarios(HorarioPelicula horario) throws Exception
     {
         boolean horarioExiste = HorarioRepetido(horario.getHora());
         if(horarioExiste){
@@ -146,6 +170,11 @@ public class AdministradorTeatroServicioImp
     }
 
     @Override
+    public void eliminarHorario(Integer codigo) throws Exception {
+
+    }
+
+    @Override
     public void eliminarHorario(String codigo) throws Exception
     {
 
@@ -174,13 +203,18 @@ public class AdministradorTeatroServicioImp
         {
             throw new Exception("La pelicula no esta en cartelera");
         }
-        List<Funcion> funciones = funcionRepo.obtenerFuncionesHorario(funcion.getSala().getCodigo(), funcion.getHorarioPelicula().getDia(),funcion.getHorarioPelicula().getHora());
+        List<Funcion> funciones = funcionRepo.obtenerFuncionesHorario(funcion.getSala().getCodigo(), funcion.getHorarioPelicula().getDia(), String.valueOf(funcion.getHorarioPelicula().getHora()));
 
         if(!funciones.isEmpty())
         {
             throw new Exception("Exu+iste una funcion en ese horario");
         }
         return funcionRepo.save(funcion);
+    }
+
+    @Override
+    public Funcion obtenerFuncion(Integer codigo) throws Exception {
+        return null;
     }
 
     public boolean peliculaEnCartelera(String nombre)
@@ -195,7 +229,7 @@ public class AdministradorTeatroServicioImp
     }
 
     @Override
-    public Funcion obtenerFuncion(String  codigo) throws Exception
+    public Funcion obtenerFuncion(String codigo) throws Exception
     {
         Optional<Funcion> funcion = funcionRepo.findById(codigo);
         if(funcion.isEmpty())
@@ -214,6 +248,11 @@ public class AdministradorTeatroServicioImp
             throw new Exception("La funcion NO EXISTE");
         }
         return funcionRepo.save(funcion);
+    }
+
+    @Override
+    public void eliminarFuncion(Integer codigo) throws Exception {
+
     }
 
     @Override
@@ -240,6 +279,11 @@ public class AdministradorTeatroServicioImp
     }
 
     @Override
+    public Sala obtenerSala(Integer codigo) throws Exception {
+        return null;
+    }
+
+    @Override
     public Sala obtenerSala(String codigo) throws Exception
     {
         Optional<Sala> sala = salaRepo.findById(codigo);
@@ -259,6 +303,11 @@ public class AdministradorTeatroServicioImp
             throw new Exception("La sala NO EXISTE");
         }
         return salaRepo.save(sala);
+    }
+
+    @Override
+    public void eliminarSala(Integer codigoSala) throws Exception {
+
     }
 
     @Override

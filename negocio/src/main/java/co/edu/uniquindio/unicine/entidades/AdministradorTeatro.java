@@ -65,4 +65,6 @@ public class AdministradorTeatro implements Serializable {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+
 }

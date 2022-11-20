@@ -4,13 +4,14 @@ import co.edu.uniquindio.unicine.dto.PeliculaFuncion;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class ClienteServicioImp
+@Service
+public class ClienteServicioImp implements ClienteServicio
 {
     @Autowired
     private ClienteRepo clienteRepo;
@@ -86,6 +87,16 @@ public class ClienteServicioImp
     }
 
     @Override
+    public List<Pelicula> buscarPeliculaPorEstadoCiudad(Integer codigo, String estadoPelicula) throws Exception {
+        return null;
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculaPorEstado(String estadoPelicula) throws Exception {
+        return null;
+    }
+
+    @Override
     public List<Pelicula> buscarPeliculaPorEstadoCiudad(Integer codigo, Estado estadoPelicula) throws Exception
     {
         List<Pelicula> peliculaGuardada = funcionRepo.listarPeliculaEstadoCiudad(codigo, estadoPelicula);
@@ -135,6 +146,11 @@ public class ClienteServicioImp
         return clienteRegistrado;
     }
 
+    @Override
+    public Cliente obtenerClientePorCedula(Integer cedula) throws Exception {
+        return null;
+    }
+
     private boolean esRepetido(String correo){
         return clienteRepo.findByEmail(correo).orElse(null) != null;
     }
@@ -171,6 +187,11 @@ public class ClienteServicioImp
     }
 
     @Override
+    public void eliminarCliente(Integer codigoCliente) throws Exception {
+
+    }
+
+    @Override
     public void eliminarCliente(String codigoCliente) throws Exception
     {
 
@@ -188,6 +209,11 @@ public class ClienteServicioImp
     public List<Cliente> listarClientes()
     {
         return clienteRepo.findAll();
+    }
+
+    @Override
+    public void listarHitorialCompra(Integer cedulaCliente) throws Exception {
+
     }
 
     //------------------------------ LISTAR LA COMPRAS -------------------------------
@@ -349,6 +375,13 @@ public class ClienteServicioImp
         clienteRepo.save(cliente);
 
         return true;
+    }
+
+
+
+    @Override
+    public List<PeliculaFuncion> listarPeliculasFunciones(String nombre) {
+        return null;
     }
 
 

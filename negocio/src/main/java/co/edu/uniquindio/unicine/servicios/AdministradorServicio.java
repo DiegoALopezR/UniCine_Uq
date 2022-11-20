@@ -12,9 +12,14 @@ public interface AdministradorServicio
     Ciudad crearCiudad(Ciudad ciudad) throws Exception;
 
     Ciudad obtenerCiudad(Integer codigo)throws Exception;
+
+    Ciudad obtenerCiudad(String codigo) throws Exception;
+
     Ciudad actualizarCiudad(Ciudad ciudad) throws Exception;
 
     void eliminarCiudad(Integer codigo) throws Exception;
+
+    void eliminarCiudad(String codigo) throws Exception;
 
     List<Ciudad> listarCiudad();
 
@@ -22,9 +27,14 @@ public interface AdministradorServicio
     AdministradorTeatro crearAdministradorTeatros(AdministradorTeatro administradorTeatro) throws Exception;
 
     AdministradorTeatro obtenerAdministrador(Integer codigo)throws Exception;
+
+    AdministradorTeatro obtenerAdministrador(String codigo) throws Exception;
+
     AdministradorTeatro actualizarAdministradorTeatros(AdministradorTeatro administradorTeatro) throws Exception;
 
     void eliminarAdministradorTeatros(Integer cedula) throws Exception;
+
+    void eliminarAdministradorTeatros(String cedula) throws Exception;
 
     List<AdministradorTeatro> listarAdministradorTeatros();
 
@@ -33,9 +43,13 @@ public interface AdministradorServicio
 
     Pelicula obtenerPelicula(Integer codigo)throws Exception;
 
+    Pelicula obtenerPelicula(String codigo) throws Exception;
+
     Pelicula actualizarPeliculas(Pelicula pelicula) throws Exception;
 
     void eliminarPeliculas(Integer codigo) throws Exception;
+
+    void eliminarPeliculas(String codigo) throws Exception;
 
     List<Pelicula> listarPeliculas();
 
@@ -44,9 +58,13 @@ public interface AdministradorServicio
 
     Confiteria obtenerConfiteria(Integer codigo)throws Exception;
 
+    Confiteria obtenerConfiteria(String codigo) throws Exception;
+
     Confiteria actualizarConfiteria(Confiteria confiteria) throws Exception;
 
     void eliminarConfiteria(Integer codigo) throws Exception;
+
+    void eliminarConfiteria(String codigo) throws Exception;
 
     List<Confiteria> listarConfiteria();
     //------------------------METODOS CRUD PARA LOS CUPONES-----------------------------------
@@ -54,9 +72,13 @@ public interface AdministradorServicio
 
     Cupon obtenerCupones(Integer codigo)throws Exception;
 
+    Cupon obtenerCupones(String codigo) throws Exception;
+
     Cupon actualizarCupones(Cupon cupon) throws Exception;
 
     void eliminarCupones(Integer codigo) throws Exception;
+
+    void eliminarCupones(String codigo) throws Exception;
 
     List<Cupon> listarCupones();
 

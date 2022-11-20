@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class HorarioPelicula implements Serializable{
     @Column(nullable = false)
     private String dia;
     @Column(nullable = false)
-    private String hora;
+    private LocalTime hora;
     @Column(nullable = false)
     private LocalDateTime fechaInicio;
     @Column(nullable = false)
@@ -39,7 +40,7 @@ public class HorarioPelicula implements Serializable{
     @OneToMany(mappedBy="horarioPelicula")
     private List<Funcion> funciones;
 
-    public HorarioPelicula(String codigo, String dia, String hora, LocalDateTime fechaInicio, LocalDateTime fechaFin)
+    public HorarioPelicula(String codigo, String dia, LocalTime hora, LocalDateTime fechaInicio, LocalDateTime fechaFin)
     {
         this.codigo = codigo;
         this.dia = dia;

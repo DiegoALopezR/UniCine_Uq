@@ -3,11 +3,13 @@ package co.edu.uniquindio.unicine.servicios;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public class AdministradorServicioImp
+@Service
+public class AdministradorServicioImp implements AdministradorServicio
 {
     //Este comentrio es pa probar que sirva
 
@@ -63,6 +65,11 @@ public class AdministradorServicioImp
         return ciudadRepo.save(ciudad);
     }
 
+    @Override
+    public Ciudad obtenerCiudad(Integer codigo) throws Exception {
+        return null;
+    }
+
     /**
      * @Param Integer codigo
      * @Return ciudad
@@ -101,13 +108,18 @@ public class AdministradorServicioImp
         return ciudadRepo.save(ciudad);
     }
 
+    @Override
+    public void eliminarCiudad(Integer codigo) throws Exception {
+
+    }
+
     /**
      * @Param Integer codigo
      * @Return
      * Este metodo se elimina una ciudad si pasa la validacion
      */
     @Override
-    public void eliminarCiudad(Integer codigo) throws Exception
+    public void eliminarCiudad(String codigo) throws Exception
     {
 
         Optional<Ciudad> ciudadGuardado = ciudadRepo.findById(codigo);
@@ -135,7 +147,7 @@ public class AdministradorServicioImp
     public AdministradorTeatro crearAdministradorTeatros(AdministradorTeatro administradorTeatro) throws Exception
     {
 
-        boolean administradorTeatrosExiste = AdministradorRepetido(administradorTeatro.getCodigo());
+        boolean administradorTeatrosExiste = AdministradorRepetido(Integer.valueOf(administradorTeatro.getCodigo()));
 
         if(administradorTeatrosExiste)
         {
@@ -149,13 +161,18 @@ public class AdministradorServicioImp
         return administradorTeatroRepo.save(administradorTeatro);
     }
 
+    @Override
+    public AdministradorTeatro obtenerAdministrador(Integer codigo) throws Exception {
+        return null;
+    }
+
     /**
      * @Param Integer codigo
      * @Return ciudad
      * Este metodo se obtiene un administradorTeatro, la cual se manda a buscar a las consultas para validar su existencia
      */
     @Override
-    public AdministradorTeatro obtenerAdministrador(Integer codigo) throws Exception
+    public AdministradorTeatro obtenerAdministrador(String codigo) throws Exception
     {
         Optional<AdministradorTeatro> administradorTeatro = administradorTeatroRepo.findById(codigo);
         if(administradorTeatro.isEmpty())
@@ -165,11 +182,11 @@ public class AdministradorServicioImp
         return administradorTeatro.get();
     }
 
-    private boolean AdministradorRepetidoCorreo(String correo)
-    {
-        return administradorTeatroRepo.findByCorreo(correo).orElse(null)!=null;
-    }
 
+    private boolean AdministradorRepetidoCorreo (String correo)
+    {
+        return administradorTeatroRepo.findByCorreo(correo).equals(correo);
+    }
     private boolean AdministradorRepetido(Integer cedula){
         return administradorTeatroRepo.findByCedula(cedula).orElse(null)!=null;
     }
@@ -189,6 +206,11 @@ public class AdministradorServicioImp
             throw new Exception("El administrador NO EXISTE");
         }
         return administradorTeatroRepo.save(administradorTeatro);
+    }
+
+    @Override
+    public void eliminarAdministradorTeatros(Integer cedula) throws Exception {
+
     }
 
     /**
@@ -227,6 +249,11 @@ public class AdministradorServicioImp
         return peliculaRepo.save(pelicula);
     }
 
+    @Override
+    public Pelicula obtenerPelicula(Integer codigo) throws Exception {
+        return null;
+    }
+
     /**
      * @Param Integer codigo
      * @Return ciudad
@@ -260,6 +287,11 @@ public class AdministradorServicioImp
         return peliculaRepo.save(pelicula);
     }
 
+    @Override
+    public void eliminarPeliculas(Integer codigo) throws Exception {
+
+    }
+
     /**
      * @Param Integer codigo
      * @Return
@@ -280,6 +312,7 @@ public class AdministradorServicioImp
     //Se lista todos las peliculas
     @Override
     public List<Pelicula> listarPeliculas()
+
     {
         return peliculaRepo.findAll();
     }
@@ -294,6 +327,11 @@ public class AdministradorServicioImp
     public Confiteria crearConfiteria(Confiteria confiteria)
     {
         return confiteriaRepo.save(confiteria);
+    }
+
+    @Override
+    public Confiteria obtenerConfiteria(Integer codigo) throws Exception {
+        return null;
     }
 
     /**
@@ -328,6 +366,11 @@ public class AdministradorServicioImp
         return confiteriaRepo.save(confiteria);
     }
 
+    @Override
+    public void eliminarConfiteria(Integer codigo) throws Exception {
+
+    }
+
     /**
      * @Param Integer codigo
      * @Return
@@ -338,7 +381,8 @@ public class AdministradorServicioImp
     {
 
         Optional<Confiteria> confiteriaGuardada = confiteriaRepo.findById(codigo);
-        if (confiteriaGuardada.isEmpty()){
+        if (confiteriaGuardada.isEmpty())
+        {
             throw new Exception("El producto NO EXISTE");
         }
         confiteriaRepo.delete(confiteriaGuardada.get());
@@ -347,6 +391,7 @@ public class AdministradorServicioImp
     //Se lista todos las confiterias
     @Override
     public List<Confiteria> listarConfiteria()
+
     {
         return confiteriaRepo.findAll();
     }
@@ -362,6 +407,11 @@ public class AdministradorServicioImp
     public Cupon crearCupones(Cupon cupon)
     {
         return cuponRepo.save(cupon);
+    }
+
+    @Override
+    public Cupon obtenerCupones(Integer codigo) throws Exception {
+        return null;
     }
 
     /**
@@ -397,6 +447,11 @@ public class AdministradorServicioImp
         return cuponRepo.save(cupon);
     }
 
+    @Override
+    public void eliminarCupones(Integer codigo) throws Exception {
+
+    }
+
     /**
      * @Param Integer codigo
      * @Return
@@ -416,6 +471,7 @@ public class AdministradorServicioImp
     //Se lista todos los cupones
     @Override
     public List<Cupon> listarCupones()
+
     {
         return cuponRepo.findAll();
     }
