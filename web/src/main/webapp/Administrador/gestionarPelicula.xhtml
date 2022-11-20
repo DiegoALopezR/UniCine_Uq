@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="/WEB-INF/templateAdmin.xhtml">
+
+    <ui:define name="title">Gestion Peliculas</ui:define>
+    <ui:define name="content">
+
+            <h:form id="crud_pelicula">
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Registrar" icon="pi pi-plus" styleClass="ui-button-success me-3" action="#{peliculaBean.crearPeliculaDialog()}" update="dialogo_crear" oncomplete="PF('registrar_pelicula').show()" />
+                        <p:commandButton id="boton_borrar" value="#{peliculaBean.mensajeBorrar}" icon="pi pi-trash" disabled="#{peliculaBean.peliculasSeleccionados.size()==0}" styleClass="ui-button-danger" action="#{peliculaBean.eliminarPeliculas()}" update="crud_pelicula:lista_peliculas,@this" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+
+                <p:dataTable id="lista_peliculas" value="#{peliculaBean.peliculas}" var="pelicula" paginator="true" rows="10"
+                             rowKey="#{pelicula.codigo}"
+                             paginatorPosition="bottom" rowSelectMode="add"
+                             selection="#{peliculaBean.peliculasSeleccionados}">
+
+                    <p:ajax event="rowSelect" update="crud_pelicula:boton_borrar" />
+                    <p:ajax event="rowUnselect" update="crud_pelicula:boton_borrar" />
+                    <p:ajax event="rowSelectCheckbox" update="crud_pelicula:boton_borrar" />
+                    <p:ajax event="rowUnselectCheckbox" update="crud_pelicula:boton_borrar" />
+                    <p:ajax event="toggleSelect" update="crud_pelicula:boton_borrar" />
+
+                    <p:column selectionMode="multiple" exportable="false" />
+
+                    <p:column headerText="Codigo" >
+                        <h:outputText value="#{pelicula.codigo}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre" >
+                        <h:outputText value="#{pelicula.nombrePelicula}"/>
+                    </p:column>
+
+                    <p:column headerText="Sinopsis" >
+                        <h:outputText value="#{pelicula.sinopsis}"/>
+                    </p:column>
+
+                    <p:column headerText="Reparto" >
+                        <h:outputText value="#{pelicula.reparto}"/>
+                    </p:column>
+
+                    <p:column headerText="Trailer" >
+                        <h:outputText value="#{pelicula.trailer}"/>
+                    </p:column>
+
+                    <p:column headerText="Estado" >
+                        <h:outputText value="#{pelicula.estadoPelicula}"/>
+                    </p:column>
+
+                    <p:column headerText="Generos" >
+                        <h:outputText value="#{pelicula.genero}"/>
+                    </p:column>
+
+
+                    <p:column headerText="" >
+                        <p:commandButton styleClass="edit-button rounded-button ui-button-success" icon="pi pi-pencil" action="#{peliculaBean.seleccionarPelicula(pelicula)}" oncomplete="PF('registrar_pelicula').show()" update="dialogo_crear"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+            <p:dialog id="dialogo_crear" widgetVar="registrar_pelicula" modal="true" header="#{peliculaBean.mensajeCrearEditar}" showEffect="fade">
+
+                <h1>REGISTRO PELICULA</h1>
+
+                <h:form >
+                    <h:panelGrid columns="3" cellpadding="5" >
+
+                        <p:outputLabel for="nombre_pelicula" value = "Nombre Pelicula : "/>
+                        <p:inputText id="nombre_pelicula" value = "#{peliculaBean.pelicula.nombrePelicula}" required="true"/>
+                        <p:messages for="nombre_pelicula"/>
+
+                        <p:outputLabel for="trailer_pelicula" value = "Trailer : "/>
+                        <p:inputText id="trailer_pelicula" value = "#{peliculaBean.pelicula.trailer}" required="true"/>
+                        <p:messages for="trailer_pelicula"/>
+
+                        <p:outputLabel for="sipnosis_pelicula" value = "Sipnosis : "/>
+                        <p:inputTextarea id="sipnosis_pelicula" rows="6" value = "#{peliculaBean.pelicula.sinopsis}" required="true"/>
+                        <p:messages for="sipnosis_pelicula"/>
+
+                        <p:outputLabel for="imagen_pelicula" value = "Imagenenes : "/>
+                        <p:fileUpload id="imagen_pelicula" listener="#{peliculaBean.subirImagenes}"
+                                      mode="advanced" multiple="true" sizeLimit="1000000" fileLimit="2"
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
+                        <p:messages for="imagen_pelicula"/>
+
+                        <p:outputLabel for="reparto_pelicula" value = "Reparto : "/>
+                        <p:inputTextarea id="reparto_pelicula" rows="6" value = "#{peliculaBean.pelicula.reparto}" required="true" />
+                        <p:messages for="reparto_pelicula"/>
+
+                        <p:outputLabel for="generos_pelicula" value = "Generos : " />
+                        <p:selectManyCheckbox id="generos_pelicula" value="#{peliculaBean.pelicula.genero}" layout="grid" columns="3">
+                            <f:selectItems value="#{peliculaBean.generos}" var="genero" itemLabel="#{genero}" itemValue="#{genero}"/>
+                        </p:selectManyCheckbox>
+                        <p:messages for="reparto_pelicula"/>
+
+                        <p:outputLabel for="estado_pelicula" value = "Estado Pelicula : " />
+                        <p:selectManyMenu id="estado_pelicula" value="#{peliculaBean.estadoPelis}" layout="grid" columns="3">
+                            <f:selectItems value="#{peliculaBean.estadosPeliculas}" var="estadopelicula" itemLabel="#{estadopelicula}" itemValue="#{estadopelicula}"/>
+                        </p:selectManyMenu>
+
+
+                    </h:panelGrid>
+                    <p:commandButton value="#{peliculaBean.mensajeCrearEditar}" action= "#{peliculaBean.registrarPelicula()}" icon="pi pi-plus-circle" update="@form,crud_pelicula:lista_peliculas"/>
+                    <p:growl for="mensaje_registro_pelicula" showDetail="true"/>
+
+                </h:form>
+            </p:dialog>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

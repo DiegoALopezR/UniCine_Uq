@@ -3,4 +3,5 @@ include 'src'
 include 'negocio'
 include 'negocio:test'
 findProject(':negocio:test')?.name = 'test'
+include 'web'
 

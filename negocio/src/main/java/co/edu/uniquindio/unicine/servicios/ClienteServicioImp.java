@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteServicioImp implements ClienteServicio
+public abstract class ClienteServicioImp implements ClienteServicio
 {
     @Autowired
     private ClienteRepo clienteRepo;
     private PeliculaRepo peliculaRepo;
-    private EmailServicio emailServicio;
+    //private EmailServicio emailServicio;
     private Foro foroRepo;
     private Puntuacion puntuacionRepo;
     private FuncionRepo funcionRepo;
@@ -30,11 +30,10 @@ public class ClienteServicioImp implements ClienteServicio
     private Float ValorTotalConDescuento;
 
     //Construtor
-    public void ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, EmailServicio emailServicio, Foro foroRepo, Puntuacion puntuacionRepo, FuncionRepo funcionRepo, CuponRepo cuponRepo, CuponClienteRepo cuponClienteRepo, ConfiteriaRepo confiteriaRepo, CompraRepo compraRepo, EntradaRepo entradaRepo, CompraConfiteriaRepo compraConfiteriaRepo)
+    public void ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, Foro foroRepo, Puntuacion puntuacionRepo, FuncionRepo funcionRepo, CuponRepo cuponRepo, CuponClienteRepo cuponClienteRepo, ConfiteriaRepo confiteriaRepo, CompraRepo compraRepo, EntradaRepo entradaRepo, CompraConfiteriaRepo compraConfiteriaRepo)
     {
         this.clienteRepo = clienteRepo;
         this.peliculaRepo = peliculaRepo;
-        this.emailServicio = emailServicio;
         this.foroRepo = foroRepo;
         this.puntuacionRepo = puntuacionRepo;
         this.funcionRepo = funcionRepo;
@@ -140,8 +139,9 @@ public class ClienteServicioImp implements ClienteServicio
 
         //Generar un codigo para el cupon
 
-        emailServicio.enviarEmail("Registro de cuenta en UniCine", "Hola "+cliente.getNombreCompleto()+" es un gusto que haya registrado en Unicine, para activar su cuenta ingrese en el siguiente link: url", cliente.getEmail());
-        emailServicio.enviarEmail("Regalo Cupon Por Registro", "Hola "+cliente.getNombreCompleto()+" Haz adquirido un cupon por registrarte, el codigo es: "+cupon.getCodigo(), cliente.getEmail());
+
+        //emailServicio.enviarEmail("Registro de cuenta en UniCine", "Hola "+cliente.getNombreCompleto()+" es un gusto que haya registrado en Unicine, para activar su cuenta ingrese en el siguiente link: url", cliente.getEmail());
+        //emailServicio.enviarEmail("Regalo Cupon Por Registro", "Hola "+cliente.getNombreCompleto()+" Haz adquirido un cupon por registrarte, el codigo es: "+cupon.getCodigo(), cliente.getEmail());
 
         return clienteRegistrado;
     }
@@ -307,12 +307,12 @@ public class ClienteServicioImp implements ClienteServicio
         }
 
         //Mandar cupon primera compra
-        List<Compra> compras = clienteRepo.obtenerComprasCliente(cliente.getCedula());
+       // List<Compra> compras = clienteRepo.obtenerComprasCliente(cliente.getCedula());
 
-        if (compras.size() == 1)
-        {
-          emailServicio.enviarEmail("Primera compra", "Hola " + cliente.getNombreCompleto() + " Por tu primera compra, haz adquirido un cupon " , cliente.getEmail());
-        }
+       // if (compras.size() == 1)
+        //{
+          //emailServicio.enviarEmail("Primera compra", "Hola " + cliente.getNombreCompleto() + " Por tu primera compra, haz adquirido un cupon " , cliente.getEmail());
+        //}
 
         return compra;
     }
@@ -353,29 +353,29 @@ public class ClienteServicioImp implements ClienteServicio
     }
 
     //------------------------------------- Cambiar Contraseña ------------------------------
-    public void enviarLinkRecuperacion(String correo)
-    {
-        emailServicio.enviarEmail("Recuperacion password", "Para recupear la contraseña ingrese a: []", correo);
-    }
+   // public void enviarLinkRecuperacion(String correo)
+    //{
+      //  emailServicio.enviarEmail("Recuperacion password", "Para recupear la contraseña ingrese a: []", correo);
+    //}
 
-    @Override
+    //@Override
     //no usar ñs
-    public boolean cambiarContraseña(String correo, String passwordNueva ) throws Exception
-    {
+   // public boolean cambiarContraseña(String correo, String passwordNueva ) throws Exception
+    //{
 
-        Cliente cliente = clienteRepo.findByEmail(correo).orElse(null);
-        enviarLinkRecuperacion(correo);
+      //  Cliente cliente = clienteRepo.findByEmail(correo).orElse(null);
+        //enviarLinkRecuperacion(correo);
 
-        if(cliente==null)
-        {
-            throw new Exception("El cliente no se encontro con el correo ingresado");
-        }
+       // if(cliente==null)
+        //{
+          //  throw new Exception("El cliente no se encontro con el correo ingresado");
+       // }
 
-        cliente.setContrasena(passwordNueva);
-        clienteRepo.save(cliente);
+        //cliente.setContrasena(passwordNueva);
+        //clienteRepo.save(cliente);
 
-        return true;
-    }
+        //return true;
+    //}
 
 
 

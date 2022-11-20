@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templateAdmin.xhtml">
+
+    <ui:define name="title">Gestion Horario</ui:define>
+    <ui:define name="content">
+
+            <h:form id="crud_horario">
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Registrar" icon="pi pi-plus" styleClass="ui-button-success me-3" action="#{horarioBean.crearHorarioDialog()}" update="dialogo_crear" oncomplete="PF('registrar_horario').show()" />
+                        <p:commandButton id="boton_borrar" value="#{horarioBean.mensajeBorrar}" icon="pi pi-trash" disabled="#{horarioBean.horariosSeleccionados.size()==0}" styleClass="ui-button-danger" action="#{horarioBean.eliminarHorarios()}" update="crud_horario:lista_horarios,@this" />
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+
+
+                <p:dataTable id="lista_horarios" value="#{horarioBean.horarios}" var="horario" paginator="true" rows="10"
+                             rowKey="#{horario.codigo}"
+                             paginatorPosition="bottom" rowSelectMode="add"
+                             selection="#{horarioBean.horariosSeleccionados}">
+
+                    <p:ajax event="rowSelect" update="crud_horario:boton_borrar" />
+                    <p:ajax event="rowUnselect" update="crud_horario:boton_borrar" />
+                    <p:ajax event="rowSelectCheckbox" update="crud_horario:boton_borrar" />
+                    <p:ajax event="rowUnselectCheckbox" update="crud_horario:boton_borrar" />
+                    <p:ajax event="toggleSelect" update="crud_horario:boton_borrar" />
+
+                    <p:column selectionMode="multiple" exportable="false" />
+
+                    <p:column headerText="Codigo" >
+                        <h:outputText value="#{horario.codigo}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha Inicio">
+                        <h:outputText value="#{horario.fechaInicio}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha Final" >
+                        <h:outputText value="#{horario.fechaFinal}"/>
+                    </p:column>
+
+                    <p:column headerText="Hora" >
+                        <h:outputText value="#{horario.hora}"/>
+                    </p:column>
+
+
+                    <p:column headerText="" >
+                        <p:commandButton styleClass="edit-button rounded-button ui-button-success" icon="pi pi-pencil" action="#{horarioBean.seleccionarHorario(horario)}" oncomplete="PF('registrar_horario').show()" update="dialogo_crear"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+
+            <p:dialog id="dialogo_crear" widgetVar="registrar_horario" modal="true" header="#{horarioBean.mensajeCrearEditar}" showEffect="fade">
+
+                <h1>REGISTRO HORARIO</h1>
+                <h:form>
+                    <h:panelGrid columns="3" cellpadding="5" >
+
+                        <p:outputLabel for="fechaInicio_Horario" value = "Fecha Inicio(dd/mm/aa) : "/>
+                        <p:datePicker id="fechaInicio_Horario" value = "#{horarioBean.horario.fechaInicio}" required="true"/>
+                        <p:messages for="fechaInicio_Horario"/>
+
+                        <p:outputLabel for="fechaFinal_Horario" value = "Fecha Final(dd/mm/aa) : "/>
+                        <p:datePicker id="fechaFinal_Horario" value = "#{horarioBean.horario.fechaFinal}" required="true"/>
+                        <p:messages for="fechaFinal_Horario"/>
+
+                        <p:outputLabel for="timeonly" value = "Hora : "/>
+                        <p:datePicker id="timeonly" value="#{horarioBean.horario.hora}" timeOnly="true" pattern="HH:mm"/>
+                        <p:messages for="timeonly"/>
+
+                    </h:panelGrid>
+                    <p:commandButton value="Registrar Horario" action= "#{horarioBean.registrarHorario()}" icon="pi pi-plus-circle" update="@form,crud_horario:lista_horarios"/>
+                    <p:growl for="mensaje_registro_horario" showDetail="true"/>
+
+                </h:form>
+            </p:dialog>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

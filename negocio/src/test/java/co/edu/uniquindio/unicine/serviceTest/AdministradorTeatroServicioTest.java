@@ -140,7 +140,7 @@ public class AdministradorTeatroServicioTest
     public void obtenerHorarioTest() throws Exception {
 
         try {
-            Horario horarioCreado = adminTeatroServicio.obtenerHorario(3);
+            HorarioPelicula horarioCreado = adminTeatroServicio.obtenerHorario(3);
             Assertions.assertNotNull(horarioCreado);
             System.out.println(horarioCreado.getCodigo());
         } catch (Exception e) {

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templateAdmin.xhtml">
+
+    <ui:define name="title">Gestion Funcion</ui:define>
+    <ui:define name="content">
+
+
+        <h:form id="crud_funcion">
+
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="Registrar" icon="pi pi-plus" styleClass="ui-button-success me-3" action="#{funcionBean.crearFuncionDialog()}" update="dialogo_crear" oncomplete="PF('registrar_funcion').show()" />
+                    <p:commandButton id="boton_borrar" value="#{funcionBean.mensajeBorrar}" icon="pi pi-trash" disabled="#{funcionBean.funcionesSeleccionadas.size()==0}" styleClass="ui-button-danger" action="#{funcionBean.eliminarFunciones()}" update="crud_funcion:lista_funciones,@this" />
+                </p:toolbarGroup>
+            </p:toolbar>
+
+
+
+            <p:dataTable id="lista_funciones" value="#{funcionBean.funciones}" var="funcion" paginator="true" rows="10"
+                         rowKey="#{funcion.codigo}"
+                         paginatorPosition="bottom" rowSelectMode="add"
+                         selection="#{funcionBean.funcionesSeleccionadas}">
+
+                <p:ajax event="rowSelect" update="crud_funcion:boton_borrar" />
+                <p:ajax event="rowUnselect" update="crud_funcion:boton_borrar" />
+                <p:ajax event="rowSelectCheckbox" update="crud_funcion:boton_borrar" />
+                <p:ajax event="rowUnselectCheckbox" update="crud_funcion:boton_borrar" />
+                <p:ajax event="toggleSelect" update="crud_funcion:boton_borrar" />
+
+                <p:column selectionMode="multiple" exportable="false" />
+
+                <p:column headerText="Codigo Funcion" >
+                    <h:outputText value="#{funcion.codigo}"/>
+                </p:column>
+
+                <p:column headerText="Precio" >
+                    <h:outputText value="#{funcion.precio}"/>
+                </p:column>
+
+                <p:column headerText="Pelicula " >
+                    <h:outputText value="#{funcion.pelicula.nombrePelicula}"/>
+                </p:column>
+
+                <p:column headerText="Sala" >
+                    <h:outputText value="#{funcion.sala.nombre}"/>
+                </p:column>
+
+                <p:column headerText="Horario" >
+                    <h:outputText value="#{funcion.horario.fechaInicio}"/>
+                </p:column>
+
+                <p:column headerText="" >
+                    <p:commandButton styleClass="edit-button rounded-button ui-button-success" icon="pi pi-pencil" action="#{funcionBean.seleccionarFuncion(funcion)}" oncomplete="PF('registrar_funcion').show()" update="dialogo_crear"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+
+        <p:dialog id="dialogo_crear" widgetVar="registrar_funcion" modal="true" header="#{funcionBean.mensajeCrearEditar}" showEffect="fade">
+
+            <h1>REGISTRO FUNCION</h1>
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5" >
+
+                    <p:outputLabel for="precio_funcion" value = "Precio : "/>
+                    <p:inputText id="precio_funcion" value = "#{funcionBean.funcion.precio}" required="true"/>
+                    <p:messages for="precio_funcion"/>
+
+
+
+                    <p:outputLabel for="sala_funcion" value = "Sala Funcion : "/>
+                    <p:selectOneMenu id="sala_funcion" value="#{funcionBean.funcion.sala}" converter="#{salaConverter}">
+                        <f:selectItem itemLabel="Seleccione la Sala" noSelectionOption="true" itemValue="#{null}"/>
+                        <f:selectItems value="#{funcionBean.salas}" var="sala" itemLabel="#{sala.nombre}" itemValue="#{sala}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="horario_funcion" value = "Horario Funcion : "/>
+                    <p:selectOneMenu id="horario_funcion" value="#{funcionBean.funcion.horario}" converter="#{horarioConverter}">
+                        <f:selectItem itemLabel="Seleccione el horario" noSelectionOption="true" itemValue="#{null}"/>
+                        <f:selectItems value="#{funcionBean.horarios}" var="horario" itemLabel="#{horario.codigo}" itemValue="#{horario}"/>
+                    </p:selectOneMenu>
+
+
+                </h:panelGrid>
+                <p:commandButton value="Registrar Funcion" action= "#{funcionBean.registrarFuncion()}" icon="pi pi-plus-circle" update="@form,crud_funcion:lista_funciones"/>
+                <p:growl for="mensaje_registro_funcion" showDetail="true"/>
+
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>
+
+</html>

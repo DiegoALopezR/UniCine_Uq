@@ -25,7 +25,6 @@ public interface AdministradorTeatroService
 
     List<Teatro> listarTeatros();
 
-    Horario crearHorarios2(Horario horario) throws Exception;
 
     HorarioPelicula crearHorarios2(HorarioPelicula horario) throws Exception;
 
@@ -35,7 +34,7 @@ public interface AdministradorTeatroService
     HorarioPelicula obtenerHorario(Integer codigo)throws Exception;
 
     //---------------------------------CRUD DE HORARIOS-------------------------------------
-    Horario crearHorarios(Horario horario) throws Exception;
+
 
     HorarioPelicula obtenerHorario(String codigo) throws Exception;
 
