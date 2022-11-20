@@ -1,7 +1,7 @@
-insert into pelicula values ("1", "vigente", "Matrix", "actor1, actor2, actor3", "Pelicula de accion");
-insert into pelicula values ("2", "vigente", "La noche del demonio", "actor1, actor2, actor3", "Pelicula de suspenso y terror");
-insert into pelicula values ("3", "vigente", "El conjuro", "actor1, actor2, actor3", "Pelicula de terror y suspenso");
-insert into pelicula values ("4", "vigente", "Rapido y furioso", "actor1, actor2, actor3", "Pelicula de accion");
+insert into pelicula values ("1", "1", "Matrix", "actor1, actor2, actor3", "Pelicula de accion","url_imagen", "url_trailer");
+insert into pelicula values ("2", "1", "La noche del demonio", "actor1, actor2, actor3", "Pelicula de suspenso y terror", "url_imagen", "url_trailer");
+insert into pelicula values ("3", "1", "El conjuro", "actor1, actor2, actor3", "Pelicula de terror y suspenso", "url_imagen", "url_trailer");
+insert into pelicula values ("4", "1", "Rapido y furioso", "actor1, actor2, actor3", "Pelicula de accion", "url_imagen", "url_trailer");
 
 insert into foro values ("1", "pregunta", "respuesta", "1");
 insert into foro values ("2", "pregunta", "respuesta", "2");
@@ -53,40 +53,40 @@ insert into sala values ("2", "sala 2", "2", "2");
 insert into sala values ("3", "sala 3", "3", "3");
 insert into sala values ("4", "sala 4", "4", "4");
 
-insert into funcion values ("1", "8000", "12:00", "1", "1");
-insert into funcion values ("2", "8000", "12:00", "2", "2");
-insert into funcion values ("3", "8000", "12:00", "3", "3");
-insert into funcion values ("4", "8000", "12:00", "4", "4");
+insert into funcion values ("1", 8000, "12:00", "1", "1");
+insert into funcion values ("2", 8000, "12:00", "2", "2");
+insert into funcion values ("3", 8000, "12:00", "3", "3");
+insert into funcion values ("4", 8000, "12:00", "4", "4");
 
-insert into compra values ("1", 2001/09/12, VISA, "200000", "1", "1", "1");
-insert into compra values ("2", 2001/09/12, NEQUI, "300000", "2", "2", "2");
-insert into compra values ("3", 2001/09/12, MASTERCARD, "90000", "3", "3", "3");
-insert into compra values ("4", 2001/09/12, DAVIPLATA, "100000", "4", "4", "4");
+insert into compra values (1, "2001-09-12", 1, 200000, "1", "1", "1");
+insert into compra values (2, "2001-09-12", 0, 300000, "2", "2", "2");
+insert into compra values (3, "2001-09-12", 2, 90000, "3", "3", "3");
+insert into compra values (4, "2001-09-12", 3, 100000, "4", "4", "4");
 
-insert into confiteria values ("1", "Hamburguesa", "15000", "ruta foto");
-insert into confiteria values ("2", "Perro", "10000", "ruta foto");
-insert into confiteria values ("3", "Gaseosa", "5000", "ruta foto");
-insert into confiteria values ("4", "Crispetas", "10000", "ruta foto");
+insert into confiteria values ("1", "Hamburguesa", 15000, "ruta foto");
+insert into confiteria values ("2", "Perro", 10000, "ruta foto");
+insert into confiteria values ("3", "Gaseosa", 5000, "ruta foto");
+insert into confiteria values ("4", "Crispetas", 10000, "ruta foto");
 
-insert into compra_confiteria values ("1", "200000", "200", "1", "3");
-insert into compra_confiteria values ("2", "300000", "200", "2", "2");
-insert into compra_confiteria values ("3", "250000", "200", "3", "3");
-insert into compra_confiteria values ("4", "250000", "200", "4", "4");
+insert into compra_confiteria values ("1", 200000, "200", "1", "3");
+insert into compra_confiteria values ("2", 300000, "200", "2", "2");
+insert into compra_confiteria values ("3", 250000, "200", "3", "3");
+insert into compra_confiteria values ("4", 250000, "200", "4", "4");
 
-insert into cupon values ("1", "vencido", "cupon del 15% de descuento en confiteria", "15%", 2022/09/12 );
-insert into cupon values ("2", "vencido", "cupon del 20% de descuento en confiteria", "20%", 2022/09/12 );
-insert into cupon values ("3", "vigente", "cupon del 30% de descuento en confiteria", "30%", 2022/09/12 );
-insert into cupon values ("4", "vigente", "cupon del 12% de descuento en confiteria", "12%", 2022/09/12 );
+insert into cupon values ("1", "vencido", "cupon del 15% de descuento en confiteria", 15, "2022-09-12" );
+insert into cupon values ("2", "vencido", "cupon del 20% de descuento en confiteria", 20, "2022-09-12" );
+insert into cupon values ("3", "vigente", "cupon del 30% de descuento en confiteria", 30, "2022-09-12" );
+insert into cupon values ("4", "vigente", "cupon del 12% de descuento en confiteria", 12, "2022-09-12" );
 
-insert into cupon_cliente values ("1", "vigente", "1", "1", "1");
-insert into cupon_cliente values ("2", "vigente", "2", "2", "2");
-insert into cupon_cliente values ("3", "vigente", "3", "3", "3");
-insert into cupon_cliente values ("4", "vigente", "4", "4", "4");
+insert into cupon_cliente values ("1", "1", "1", 1, "1");
+insert into cupon_cliente values ("2", "1", "2", 2, "2");
+insert into cupon_cliente values ("3", "1", "3", 3, "3");
+insert into cupon_cliente values ("4", "1", "4", 4, "4");
 
-insert into entrada values ("1", "8", "3", "1");
-insert into entrada values ("2", "5", "6", "2");
-insert into entrada values ("3", "4", "6", "3");
-insert into entrada values ("4", "1", "5", "4");
+insert into entrada values ("1", "8", "3", 1);
+insert into entrada values ("2", "5", "6", 2);
+insert into entrada values ("3", "4", "6", 3);
+insert into entrada values ("4", "1", "5", 4);
 
 insert into genero values ("1", "Romance");
 insert into genero values ("2", "Comedia");
@@ -94,12 +94,12 @@ insert into genero values ("3", "Accion");
 insert into genero values ("4", "Terror");
 insert into genero values ("5", "Suspenso");
 
-insert into genero_nombres values ("3", "Matrix", "1");
-insert into genero_nombres values ("4", "La noche del demonio", "2");
-insert into genero_nombres values ("5", "La noche del demonio", "2");
-insert into genero_nombres values ("4", "El conjunro", "3");
-insert into genero_nombres values ("5", "El conjunro", "3");
-insert into genero_nombres values ("3", "Rapido y furioso", "4");
+insert into genero_peliculas values ("1", "1");
+insert into genero_peliculas values ("2", "2");
+insert into genero_peliculas values ("3", "2");
+insert into genero_peliculas values ("4", "3");
+insert into genero_peliculas values ("5", "4");
+
 
 insert into puntuacion values ("1", "5 estrellas", "1", "1");
 insert into puntuacion values ("2", "2 estrellas", "2", "2");

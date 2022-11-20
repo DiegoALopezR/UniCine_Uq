@@ -17,7 +17,6 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
-@ToString
 
 public class Ciudad implements Serializable
 {

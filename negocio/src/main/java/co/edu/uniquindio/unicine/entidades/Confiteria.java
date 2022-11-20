@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
 import java.io.Serializable;
 import java.util.List;
@@ -18,7 +15,6 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
-@ToString
 
 public class Confiteria implements Serializable {
 
@@ -29,20 +25,25 @@ public class Confiteria implements Serializable {
     private String nombre;
     @PositiveOrZero
     @Column(nullable = false)
-    private String precio;
+    private double precio;
     private String urlImagen;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoConfi tipoConfiteria;
 
     //FK
     @ToString.Exclude
     @OneToMany(mappedBy="confiteria")
     private List<CompraConfiteria> compraConfiteria;
 
-    public Confiteria(String codigo, String nombre, String precio, String urlImagen)
+    public Confiteria(String codigo, String nombre, double precio, String urlImagen, TipoConfi tipoConfiteria)
     {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.urlImagen = urlImagen;
+        this.tipoConfiteria= tipoConfiteria;
 
     }
 

@@ -26,7 +26,7 @@ public class Pelicula implements Serializable {
     private String urlTrailer;
     private String urlImagen;
     @Column(nullable = false)
-    private String estado;
+    private Estado estado;
     private String reparto;
 
     //FK
@@ -48,7 +48,7 @@ public class Pelicula implements Serializable {
     @ManyToMany(mappedBy = "peliculas")
     private List<Genero> generos;
 
-    public Pelicula(String codigo, String nombre, String sinopsis, String urlTrailer, String urlImagen, String estado, String reparto, List<Genero> generos)
+    public Pelicula(String codigo, String nombre, String sinopsis, String urlTrailer, String urlImagen, Estado estado, String reparto, List<Genero> generos)
     {
         this.codigo = codigo;
         this.nombre = nombre;

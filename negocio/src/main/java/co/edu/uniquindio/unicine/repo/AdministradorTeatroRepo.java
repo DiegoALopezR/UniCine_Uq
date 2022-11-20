@@ -5,18 +5,25 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public interface AdministradorTeatroRepo extends JpaRepository<AdministradorTeatro, String>
 {
 
     @Query("Select a From AdministradorTeatro a where a.correo = :correo")
-    AdministradorTeatroRepo obtener(String correo);
+    AdministradorTeatro obtener(String correo);
 
-    AdministradorTeatroRepo findByCorreo(String correo);
+    AdministradorTeatro findByCorreo(String correo);
 
     @Query("select a from AdministradorTeatro a where a.correo = :correo and a.password = :password")
-    AdministradorTeatroRepo comprobarAutenticacion(String correo, String password);
+    AdministradorTeatro comprobarAutenticacion(String correo, String password);
 
-    AdministradorTeatroRepo findByCorreoAndPassword(String correo, String password);
+    AdministradorTeatro findByCorreoAndPassword(String correo, String password);
+
+
+    //Esta consulta validad si existe un administradorTeatro ingresando la cedula
+    Optional<AdministradorTeatro> findByCedula(Integer cedula);
+
 }

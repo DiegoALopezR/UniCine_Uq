@@ -17,19 +17,18 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
-@ToString
 
 public class CompraConfiteria implements Serializable {
 
     //PK
     @Id
     private String codigo;
-    @PositiveOrZero
+
     @Column(nullable = false )
-    private String precio;
-    @PositiveOrZero
+    private double precio;
+
     @Column(nullable = false)
-    private String unidades;
+    private Integer unidades;
 
     @ManyToOne
     private Confiteria confiteria;
@@ -37,7 +36,7 @@ public class CompraConfiteria implements Serializable {
     @ManyToOne
     private Compra compraConfi;
 
-    public CompraConfiteria(String codigo, String precio, String unidades)
+    public CompraConfiteria(String codigo, double precio, Integer unidades)
     {
         this.codigo = codigo;
         this.precio = precio;

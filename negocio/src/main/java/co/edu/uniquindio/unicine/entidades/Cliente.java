@@ -20,7 +20,8 @@ public class Cliente implements Serializable {
 
     //PK
     @Id
-    private String cedula;
+    private Integer cedula;
+
     private String nombreCompleto;
     @Column(nullable = false, length = 35)
     private String email;
@@ -54,7 +55,7 @@ public class Cliente implements Serializable {
     @ManyToOne
     private Foro foro;
 
-    public Cliente(String cedula, String nombreCompleto, String email, String contrasena)
+    public Cliente(Integer cedula, String nombreCompleto, String email, String contrasena)
     {
         this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;

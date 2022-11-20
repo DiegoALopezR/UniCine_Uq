@@ -16,21 +16,19 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
-@ToString
-
 public class Compra implements Serializable {
 
    //PK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String codigo;
+    private Integer codigo;
     @Column(nullable = false )
     private MedioPago medioPago;
     @Column(nullable = false )
     private LocalDateTime fechaCompra;
     @PositiveOrZero
     @Column(nullable = false )
-    private String precioTotal;
+    private Float precioTotal;
 
     //FK
     @ToString.Exclude

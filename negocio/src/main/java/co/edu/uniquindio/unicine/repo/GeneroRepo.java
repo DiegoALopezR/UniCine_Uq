@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 public interface GeneroRepo extends JpaRepository<Genero, String>
 {
     @Query("Select g From Genero g where g.codigo = :codigo")
-    GeneroRepo obtener(String nombre);
+    Genero obtener(String nombre);
 
-    GeneroRepo findByNombre(String nombre);
+    Genero findByNombre(String nombre);
 
     @Query("select g from Genero g where g.codigo = :nombre and g.nombre =:nombre")
-    GeneroRepo comprobarAutenticacion(String codigo, String compra);
+    Genero comprobarAutenticacion(String codigo, String compra);
 
-    GeneroRepo findByCodigoAndNombre(String codigo, String nombre);
+    Genero findByCodigoAndNombre(String codigo, String nombre);
 
 }

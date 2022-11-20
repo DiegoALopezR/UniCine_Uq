@@ -15,7 +15,6 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
-@ToString
 
 public class Funcion implements Serializable{
 
@@ -24,7 +23,7 @@ public class Funcion implements Serializable{
     private String codigo;
     @PositiveOrZero
     @Column(nullable = false)
-    private String precio;
+    private double precio;
     @ManyToOne
     private Sala sala;
     @ManyToOne
@@ -38,7 +37,7 @@ public class Funcion implements Serializable{
     @ManyToOne
     private Pelicula pelicula;
 
-    public Funcion(String codigo, String precio, Sala sala, HorarioPelicula horarioPelicula, Pelicula pelicula)
+    public Funcion(String codigo, double precio, Sala sala, HorarioPelicula horarioPelicula, Pelicula pelicula)
     {
         this.codigo = codigo;
         this.precio = precio;

@@ -11,12 +11,12 @@ public interface CompraConfiteriaRepo extends JpaRepository<CompraConfiteria,Str
 {
 
     @Query("Select c From CompraConfiteria c where c.codigo = :codigo")
-    CompraConfiteriaRepo obtener(String codigo);
+    CompraConfiteria obtener(String codigo);
 
     CompraConfiteriaRepo findByCodigo(String codigo);
 
     @Query("select c from CompraConfiteria c where c.codigo = :codigo and c.confiteria =:confiteria")
-    CompraConfiteriaRepo comprobarAutenticacion(String codigo, String confiteria);
+    CompraConfiteria comprobarAutenticacion(String codigo, String confiteria);
 
-    CompraConfiteriaRepo findByCodigoAndConfiteria(String codigo, Confiteria confiteria);
+    CompraConfiteria findByCodigoAndConfiteria(String codigo, Confiteria confiteria);
 }

@@ -12,13 +12,13 @@ import java.util.List;
 public interface ForoRepo extends JpaRepository<Foro,String>
 {
     @Query("Select f From Foro f where f.codigo = :codigo")
-    ForoRepo obtener(String codigo);
+    Foro obtener(String codigo);
 
-    ForoRepo findByCodigo(String codigo);
+    Foro findByCodigo(String codigo);
 
-    @Query("select f from Foro f where f.codigo = :codigo and f.clientes =:cliente")
-    ForoRepo comprobarAutenticacion(String codigo, String clientes);
+    @Query("select f from Foro f where f.codigo = :codigo")
+    Foro comprobarAutenticacion(String codigo, String clientes);
 
-    ForoRepo findByCodigoAndClientes(String codigo, List<Cliente> clientes);
+    Foro findByCodigoAndClientes(String codigo, List<Cliente> clientes);
 
 }

@@ -17,7 +17,6 @@ import java.util.Objects;
 @Setter
 @Entity
 @NoArgsConstructor
-@ToString
 
 public class Cupon implements Serializable {
 
@@ -29,7 +28,7 @@ public class Cupon implements Serializable {
     private String descripcion;
     @PositiveOrZero
     @Column(nullable = false)
-    private String descuento;
+    private double descuento;
     @Column(nullable = false)
     private String criterio;
     @Column(nullable = false)
@@ -40,7 +39,7 @@ public class Cupon implements Serializable {
     @OneToMany(mappedBy="cupon")
     private List<CuponCliente> cuponCliente;
 
-    public Cupon(String codigo, String descripcion, String descuento, String criterio, LocalDateTime fechaVencimiento)
+    public Cupon(String codigo, String descripcion, double descuento, String criterio, int fechaVencimiento)
     {
         this.codigo = codigo;
         this.descripcion = descripcion;
