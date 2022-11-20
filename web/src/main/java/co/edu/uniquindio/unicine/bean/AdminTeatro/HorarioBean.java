@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unicine.bean.AdminTeatro;
 
-import co.edu.uniquindio.unicine.entidades.Horario;
-import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
+import co.edu.uniquindio.unicine.entidades.HorarioPelicula;
+import co.edu.uniquindio.unicine.servicios.AdministradorTeatroService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +22,21 @@ public class HorarioBean implements Serializable {
 
     @Getter
     @Setter
-    private Horario horario;
+    private HorarioPelicula horario;
 
     @Autowired
-    private AdminTeatroServicio adminTeatroServicio;
+    private AdministradorTeatroService adminTeatroServicio;
 
 
     //-----actualziar-----
 
     @Getter
     @Setter
-    private List<Horario> horarios;
+    private List<HorarioPelicula> horarios;
 
     @Getter
     @Setter
-    private List<Horario> horariosSeleccionados;
+    private List<HorarioPelicula> horariosSeleccionados;
 
     @Getter
     @Setter
@@ -45,7 +45,7 @@ public class HorarioBean implements Serializable {
 
     @PostConstruct
     public void init(){
-        horario = new Horario();
+        horario = new HorarioPelicula();
 
         horariosSeleccionados = new ArrayList<>();
         horarios = adminTeatroServicio.listarHorarios();
@@ -58,10 +58,10 @@ public class HorarioBean implements Serializable {
         try {
             if(!editar) {
                 //horario.setHora(LocalTime.);
-                Horario registro = adminTeatroServicio.crearHorarios(horario);
+                HorarioPelicula registro = adminTeatroServicio.crearHorarios(horario);
                 horarios.add(registro);
 
-                horario = new Horario();
+                horario = new HorarioPelicula();
 
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "REGISTRO EXITOSO");
                 FacesContext.getCurrentInstance().addMessage("mensaje_registro_horario", fm);
@@ -83,7 +83,7 @@ public class HorarioBean implements Serializable {
     public void eliminarHorarios(){
 
         try {
-            for (Horario horario : horariosSeleccionados){
+            for (HorarioPelicula horario : horariosSeleccionados){
                 adminTeatroServicio.eliminarHorario(horario.getCodigo());
                 horarios.remove(horario);
             }
@@ -112,13 +112,13 @@ public class HorarioBean implements Serializable {
     }
 
 
-    public void seleccionarHorario(Horario horarioSelec){
+    public void seleccionarHorario(HorarioPelicula horarioSelec){
         this.horario=horarioSelec;
         editar=true;
     }
 
     public void crearHorarioDialog(){
-        this.horario= new Horario();
+        this.horario= new HorarioPelicula();
         editar=false;
     }
 

@@ -162,7 +162,7 @@ public class AdministradorServicioImp implements AdministradorServicio
     }
 
     @Override
-    public AdministradorTeatro obtenerAdministrador(Integer codigo) throws Exception {
+    public AdministradorTeatro obtenerAdministrador(String s, Integer codigo) throws Exception {
         return null;
     }
 

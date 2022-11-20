@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unicine.converter;
 
-import co.edu.uniquindio.unicine.entidades.Horario;
-import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
+import co.edu.uniquindio.unicine.entidades.HorarioPelicula;
+import co.edu.uniquindio.unicine.servicios.AdministradorTeatroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +11,14 @@ import javax.faces.convert.Converter;
 
 
 @Component
-public class HorarioConverter implements Converter<Horario> {
+public class HorarioConverter implements Converter<HorarioPelicula> {
 
     @Autowired
-    private AdminTeatroServicio adminTeatroServicio;
+    private AdministradorTeatroService adminTeatroServicio;
 
     @Override
-    public Horario getAsObject(FacesContext context, UIComponent component, String value) {
-        Horario horario ;
+    public HorarioPelicula getAsObject(FacesContext context, UIComponent component, String value) {
+        HorarioPelicula horario ;
         try {
             horario = adminTeatroServicio.obtenerHorario(Integer.parseInt(value));
         }catch (Exception e){
@@ -28,7 +28,7 @@ public class HorarioConverter implements Converter<Horario> {
     }
 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Horario value) {
+    public String getAsString(FacesContext context, UIComponent component, HorarioPelicula value) {
 
         if(value != null){
             return ""+value.getCodigo();

@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unicine.bean;
 
 import co.edu.uniquindio.unicine.entidades.Ciudad;
-import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
+import co.edu.uniquindio.unicine.entidades.Estado;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.servicios.AdministradorServicio;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
@@ -43,8 +43,8 @@ public class InicioBean implements Serializable {
             listaImagenes.add(" ");
             listaImagenes.add(" ");
 
-            peliculasCartelera = clienteServicio.buscarPeliculaPorEstado(EstadoPelicula.CARTELERA);
-            peliculasProximamente = clienteServicio.buscarPeliculaPorEstado(EstadoPelicula.PROXIMAMENTE);
+            peliculasCartelera = clienteServicio.buscarPeliculaPorEstado(Estado.CARTELERA);
+            peliculasProximamente = clienteServicio.buscarPeliculaPorEstado(Estado.PROXIMAMENTE);
             ciudades = administradorServicio.listarCiudad();
         }catch (Exception e){
             e.printStackTrace();
@@ -54,8 +54,8 @@ public class InicioBean implements Serializable {
     public void elegirCiudad(){
         try {
             if(ciudad != null){
-                peliculasCartelera = clienteServicio.buscarPeliculaPorEstadoCiudad(ciudad.getCodigoPostal(), EstadoPelicula.CARTELERA);
-                peliculasProximamente = clienteServicio.buscarPeliculaPorEstadoCiudad(ciudad.getCodigoPostal(), EstadoPelicula.PROXIMAMENTE);
+                peliculasCartelera = clienteServicio.buscarPeliculaPorEstadoCiudad(Integer.valueOf(ciudad.getCodigo()), Estado.CARTELERA);
+                peliculasProximamente = clienteServicio.buscarPeliculaPorEstadoCiudad(Integer.valueOf(ciudad.getCodigo()), Estado.PROXIMAMENTE);
             }
         }catch (Exception e){
             e.printStackTrace();

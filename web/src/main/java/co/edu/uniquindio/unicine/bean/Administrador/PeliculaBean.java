@@ -1,10 +1,9 @@
 package co.edu.uniquindio.unicine.bean.Administrador;
 
-import co.edu.uniquindio.unicine.entidades.EstadoPelicula;
+import co.edu.uniquindio.unicine.entidades.Estado;
 import co.edu.uniquindio.unicine.entidades.Genero;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.servicios.AdministradorServicio;
-import co.edu.uniquindio.unicine.servicios.CloudinaryServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.FileUploadEvent;
@@ -35,8 +34,7 @@ public class PeliculaBean implements Serializable {
     @Setter @Getter
     private List<Pelicula> peliculasSeleccionados;
     private boolean editar;
-    @Autowired
-    private CloudinaryServicio cloudinaryServicio;
+
     @Autowired
     private  AdministradorServicio administradorServicio;
 
@@ -46,10 +44,10 @@ public class PeliculaBean implements Serializable {
     private List<Genero> generos;
 
     @Getter @Setter
-    private List<EstadoPelicula> estadosPeliculas;
+    private List<Estado> estadosPeliculas;
 
     @Getter @Setter
-    private List<EstadoPelicula> estadoPelis;
+    private List<Estado> estadoPelis;
 
     @PostConstruct
     public void init(){
@@ -58,8 +56,7 @@ public class PeliculaBean implements Serializable {
         peliculasSeleccionados = new ArrayList<>();
         editar= false;
         imagenes = new HashMap<>();
-        generos = Arrays.asList(Genero.values());
-        estadosPeliculas = Arrays.asList(EstadoPelicula.values());
+        estadosPeliculas = Arrays.asList(Estado.values());
         estadoPelis = new ArrayList<>();
     }
 
@@ -68,8 +65,8 @@ public class PeliculaBean implements Serializable {
            if(!editar) {
                if(!imagenes.isEmpty()){
 
-                   pelicula.setEstadoPelicula(estadoPelis.get(0));
-                   pelicula.setImagenes(imagenes);
+                   pelicula.setEstado(estadoPelis.get(0));
+                   pelicula.setUrlImagen(String.valueOf(imagenes));
                    Pelicula registro = administradorServicio.crearPeliculas(pelicula);
                    peliculas.add(registro);
 
@@ -138,18 +135,18 @@ public class PeliculaBean implements Serializable {
         editar=false;
     }
 
-    public void subirImagenes(FileUploadEvent event) throws IOException {
-        try {
-            UploadedFile imagen = event.getFile();
-            File imagenFile = convertirUploadedfile(imagen);
-            Map resultado = cloudinaryServicio.subirImagen(imagenFile, "peliculas");
-            imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
-        }catch (Exception e){
-            e.printStackTrace();
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensaje_pelicula", fm);
-        }
-    }
+  //  public void subirImagenes(FileUploadEvent event) throws IOException {
+    //    try {
+      //      UploadedFile imagen = event.getFile();
+       //     File imagenFile = convertirUploadedfile(imagen);
+         //   Map resultado = cloudinaryServicio.subirImagen(imagenFile, "peliculas");
+           // imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
+        //}catch (Exception e){
+          //  e.printStackTrace();
+            //FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            //FacesContext.getCurrentInstance().addMessage("mensaje_pelicula", fm);
+        //}
+    //}
 
     private File convertirUploadedfile(UploadedFile imagen) throws IOException{
         File file = new File(imagen.getFileName());

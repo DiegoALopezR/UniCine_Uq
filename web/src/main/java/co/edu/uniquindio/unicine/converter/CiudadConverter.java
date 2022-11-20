@@ -30,7 +30,7 @@ public class CiudadConverter implements Converter<Ciudad> {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Ciudad value) {
         if(value != null){
-            return ""+value.getCodigoPostal();
+            return ""+value.getCodigo();
         }
         return "";
     }

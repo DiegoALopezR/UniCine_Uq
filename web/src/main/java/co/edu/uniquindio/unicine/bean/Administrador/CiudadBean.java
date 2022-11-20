@@ -70,7 +70,7 @@ public class CiudadBean {
 
         try {
             for (Ciudad ciudad : ciudadesSeleccionados){
-                administradorServicio.eliminarCiudad(ciudad.getCodigoPostal());
+                administradorServicio.eliminarCiudad(ciudad.getCodigo());
                 ciudades.remove(ciudad);
             }
             ciudadesSeleccionados.clear();

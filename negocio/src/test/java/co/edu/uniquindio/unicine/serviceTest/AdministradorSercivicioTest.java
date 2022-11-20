@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
@@ -136,7 +135,7 @@ public class AdministradorSercivicioTest
     public void obtenerAdministradorTest() throws Exception
     {
         try {
-            AdministradorTeatro administradorTeatro = administradorServicio.obtenerAdministrador(1015);
+            AdministradorTeatro administradorTeatro = administradorServicio.obtenerAdministrador(String.valueOf(value), 1015);
             Assertions.assertNotNull(administradorTeatro);
             System.out.println(administradorTeatro.getCodigo());
         } catch (Exception e) {
@@ -150,7 +149,7 @@ public class AdministradorSercivicioTest
     {
 
         try {
-            AdministradorTeatro adminTeatroGuardado = administradorServicio.obtenerAdministrador(1015);
+            AdministradorTeatro adminTeatroGuardado = administradorServicio.obtenerAdministrador(String.valueOf(value), 1015);
             System.out.println(adminTeatroGuardado.getCodigo());
             adminTeatroGuardado.setCodigo("lady");
             AdministradorTeatro adminTeatroActualizado= administradorServicio.actualizarAdministradorTeatros(adminTeatroGuardado);
@@ -168,7 +167,7 @@ public class AdministradorSercivicioTest
 
         try {
             administradorServicio.eliminarAdministradorTeatros(1015);
-            AdministradorTeatro administradorTeatro = administradorServicio.obtenerAdministrador(1015);
+            AdministradorTeatro administradorTeatro = administradorServicio.obtenerAdministrador(String.valueOf(value), 1015);
             Assertions.assertNull(administradorTeatro);
         }catch (Exception e){
             throw new Exception(e);

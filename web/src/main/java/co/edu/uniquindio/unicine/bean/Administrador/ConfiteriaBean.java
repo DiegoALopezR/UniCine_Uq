@@ -1,9 +1,8 @@
 package co.edu.uniquindio.unicine.bean.Administrador;
 
 import co.edu.uniquindio.unicine.entidades.Confiteria;
-import co.edu.uniquindio.unicine.entidades.TipoConfiteria;
+import co.edu.uniquindio.unicine.entidades.TipoConfi;
 import co.edu.uniquindio.unicine.servicios.AdministradorServicio;
-import co.edu.uniquindio.unicine.servicios.CloudinaryServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.primefaces.event.FileUploadEvent;
@@ -28,7 +27,7 @@ public class ConfiteriaBean {
     private Confiteria confiteria;
 
     @Getter @Setter
-    private TipoConfiteria tipoConfiteria;
+    private TipoConfi tipoConfiteria;
 
     @Getter @Setter
     private List<Confiteria> confiterias;
@@ -42,13 +41,11 @@ public class ConfiteriaBean {
     private AdministradorServicio administradorServicio;
 
     @Getter @Setter
-    private List<TipoConfiteria> tipoConfiterias;
+    private List<TipoConfi> tipoConfiterias;
 
     @Getter @Setter
-    private List<TipoConfiteria> tipoConfi;
+    private List<TipoConfi> tipoConfi;
 
-    @Autowired
-    private CloudinaryServicio cloudinaryServicio;
 
     private Map<String, String> imagenes;
 
@@ -59,7 +56,7 @@ public class ConfiteriaBean {
         confiterias = administradorServicio.listarConfiteria();
         confiteriasSeleccionados = new ArrayList<>();
         editar= false;
-        tipoConfiterias= Arrays.asList(TipoConfiteria.values());
+        tipoConfiterias= Arrays.asList(TipoConfi.values());
         tipoConfi = new ArrayList<>();
         imagenes = new HashMap<>();
     }
@@ -70,7 +67,7 @@ public class ConfiteriaBean {
             if(!editar) {
                 if(!imagenes.isEmpty()){
                 confiteria.setTipoConfiteria(tipoConfi.get(0));
-                confiteria.setImagenes(imagenes);
+                confiteria.setUrlImagen(String.valueOf(imagenes));
                 Confiteria registro = administradorServicio.crearConfiteria(confiteria);
                 confiterias.add(registro);
 
@@ -99,7 +96,7 @@ public class ConfiteriaBean {
 
         try {
             for (Confiteria confiteria : confiteriasSeleccionados){
-                administradorServicio.eliminarConfiteria(confiteria.getCodigoProducto());
+                administradorServicio.eliminarConfiteria(confiteria.getCodigo());
                 confiterias.remove(confiteria);
             }
             confiteriasSeleccionados.clear();
@@ -139,18 +136,18 @@ public class ConfiteriaBean {
 
 
 
-    public void subirImagenes(FileUploadEvent event) throws IOException {
-        try {
-            UploadedFile imagen = event.getFile();
-            File imagenFile = convertirUploadedfile(imagen);
-            Map resultado = cloudinaryServicio.subirImagen(imagenFile, "confiterias");
-            imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
-        }catch (Exception e){
-            e.printStackTrace();
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensaje_registro_confiteria", fm);
-        }
-    }
+   // public void subirImagenes(FileUploadEvent event) throws IOException {
+     //   try {
+       //     UploadedFile imagen = event.getFile();
+         //   File imagenFile = convertirUploadedfile(imagen);
+           // Map resultado = cloudinaryServicio.subirImagen(imagenFile, "confiterias");
+            //imagenes.put(resultado.get("public_id").toString(), resultado.get("url").toString());
+        //}catch (Exception e){
+          //  e.printStackTrace();
+            //FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            //FacesContext.getCurrentInstance().addMessage("mensaje_registro_confiteria", fm);
+        //}
+    //}
 
     private File convertirUploadedfile(UploadedFile imagen) throws IOException{
         File file = new File(imagen.getFileName());

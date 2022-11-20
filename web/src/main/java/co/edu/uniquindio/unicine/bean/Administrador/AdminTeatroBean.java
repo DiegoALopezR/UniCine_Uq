@@ -73,7 +73,7 @@ public class AdminTeatroBean {
 
         try {
             for (AdministradorTeatro adminTeatro : adminTeatrosSeleccionados){
-                administradorServicio.eliminarAdministradorTeatros(adminTeatro.getCedula());
+                administradorServicio.eliminarAdministradorTeatros(adminTeatro.getCodigo());
                 adminTeatros.remove(adminTeatro);
             }
             adminTeatrosSeleccionados.clear();

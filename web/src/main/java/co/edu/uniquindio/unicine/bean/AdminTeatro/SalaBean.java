@@ -2,7 +2,7 @@ package co.edu.uniquindio.unicine.bean.AdminTeatro;
 
 import co.edu.uniquindio.unicine.entidades.Sala;
 import co.edu.uniquindio.unicine.entidades.Teatro;
-import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
+import co.edu.uniquindio.unicine.servicios.AdministradorTeatroService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class SalaBean implements Serializable {
     private Sala sala;
 
     @Autowired
-    private AdminTeatroServicio adminTeatroServicio;
+    private AdministradorTeatroService adminTeatroServicio;
 
     @Getter
     @Setter
@@ -82,7 +82,7 @@ public class SalaBean implements Serializable {
 
         try {
             for (Sala sala : salasSeleccionadas){
-                adminTeatroServicio.eliminarSala(sala.getNumeroSala());
+                adminTeatroServicio.eliminarSala(sala.getCodigo());
                 salas.remove(sala);
             }
             salasSeleccionadas.clear();

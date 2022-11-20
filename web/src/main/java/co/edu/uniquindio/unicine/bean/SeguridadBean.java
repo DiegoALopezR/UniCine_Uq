@@ -1,7 +1,11 @@
 package co.edu.uniquindio.unicine.bean;
 
-import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
+import co.edu.uniquindio.unicine.entidades.Administrador;
+import co.edu.uniquindio.unicine.entidades.AdministradorTeatro;
+import co.edu.uniquindio.unicine.entidades.Ciudad;
+import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.servicios.AdministradorServicio;
+import co.edu.uniquindio.unicine.servicios.AdministradorTeatroService;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +30,7 @@ public class SeguridadBean implements Serializable {
     private AdministradorServicio administradorServicio;
 
     @Autowired
-    private AdminTeatroServicio adminTeatroServicio;
+    private AdministradorTeatroService adminTeatroServicio;
 
     @Getter
     @Setter
@@ -35,9 +39,7 @@ public class SeguridadBean implements Serializable {
     @Getter
     @Setter
     private String email, password;
-    @Getter
-    @Setter
-    private Persona persona;
+
     @Getter
     @Setter
     private String tipoSesion;
@@ -53,11 +55,11 @@ public class SeguridadBean implements Serializable {
         autenticado = false;
     }
 
-    public String iniciarSesionCliente() {
+    public String iniciarSesionCliente(Cliente Cliente) {
 
         if (!email.isEmpty() && !password.isEmpty()) {
             try {
-                persona = clienteServicio.login(email, password);
+                Cliente = clienteServicio.login(email, password);
                 tipoSesion = "cliente";
                 autenticado = true;
 
@@ -74,15 +76,15 @@ public class SeguridadBean implements Serializable {
     }
 
 
-    public String iniciarSesionAdmins() {
+    public String iniciarSesionAdmins(Administrador Administrador, AdministradorTeatro AdministradorTeatro) {
 
         if (!email.isEmpty() && !password.isEmpty()) {
             try {
 
-                persona = administradorServicio.login(email, password);
+                Administrador = administradorServicio.login(email, password);
 
-                if (persona == null) {
-                    persona = adminTeatroServicio.login(email, password);
+                if (Administrador == null) {
+                    AdministradorTeatro = adminTeatroServicio.login(email, password);
                     tipoSesion = "admin_teatro";
                 } else {
                     tipoSesion = "admin";

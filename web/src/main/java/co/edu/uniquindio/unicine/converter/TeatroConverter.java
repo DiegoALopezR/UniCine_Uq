@@ -1,7 +1,7 @@
 package co.edu.uniquindio.unicine.converter;
 
 import co.edu.uniquindio.unicine.entidades.Teatro;
-import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
+import co.edu.uniquindio.unicine.servicios.AdministradorTeatroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import javax.faces.convert.Converter;
 public class TeatroConverter implements Converter<Teatro> {
 
     @Autowired
-   private AdminTeatroServicio adminTeatroServicio;
+   private AdministradorTeatroService adminTeatroServicio;
 
     @Override
     public Teatro getAsObject(FacesContext context, UIComponent component, String value) {
@@ -32,7 +32,7 @@ public class TeatroConverter implements Converter<Teatro> {
     public String getAsString(FacesContext context, UIComponent component, Teatro value) {
 
         if(value != null){
-            return ""+value.getNit();
+            return ""+value.getCodigo();
         }
         return "";
     }

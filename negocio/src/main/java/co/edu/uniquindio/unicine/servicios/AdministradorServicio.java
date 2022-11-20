@@ -13,6 +13,7 @@ public interface AdministradorServicio
 
     Ciudad obtenerCiudad(Integer codigo)throws Exception;
 
+
     Ciudad obtenerCiudad(String codigo) throws Exception;
 
     Ciudad actualizarCiudad(Ciudad ciudad) throws Exception;
@@ -26,7 +27,7 @@ public interface AdministradorServicio
     //-------------------------METODOS CRUD PARA LOS ADMINISTRADOR_TEATROS--------------------------------
     AdministradorTeatro crearAdministradorTeatros(AdministradorTeatro administradorTeatro) throws Exception;
 
-    AdministradorTeatro obtenerAdministrador(Integer codigo)throws Exception;
+    AdministradorTeatro obtenerAdministrador(String s, Integer codigo)throws Exception;
 
     AdministradorTeatro obtenerAdministrador(String codigo) throws Exception;
 

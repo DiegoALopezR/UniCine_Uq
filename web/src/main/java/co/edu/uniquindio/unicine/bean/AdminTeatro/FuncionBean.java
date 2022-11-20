@@ -1,11 +1,11 @@
 package co.edu.uniquindio.unicine.bean.AdminTeatro;
 
 import co.edu.uniquindio.unicine.entidades.Funcion;
-import co.edu.uniquindio.unicine.entidades.Horario;
+import co.edu.uniquindio.unicine.entidades.HorarioPelicula;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
 import co.edu.uniquindio.unicine.entidades.Sala;
-import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
 import co.edu.uniquindio.unicine.servicios.AdministradorServicio;
+import co.edu.uniquindio.unicine.servicios.AdministradorTeatroService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class FuncionBean implements Serializable {
     private List<Funcion> funcionesSeleccionadas;
 
     @Autowired
-    private AdminTeatroServicio adminTeatroServicio;
+    private AdministradorTeatroService adminTeatroServicio;
 
     @Autowired
     private AdministradorServicio administradorServicio;
@@ -54,7 +54,7 @@ public class FuncionBean implements Serializable {
 
     @Getter
     @Setter
-    private List<Horario> horarios;
+    private List<HorarioPelicula> horarios;
 
     @PostConstruct
     public void init(){

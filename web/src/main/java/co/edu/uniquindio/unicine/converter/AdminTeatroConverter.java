@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import java.io.Serializable;
 
 @Component
-public class AdminTeatroConverter implements Converter<AdministradorTeatro> {
+public class AdminTeatroConverter implements Converter<AdministradorTeatro>, Serializable {
 
     @Autowired
     private AdministradorServicio administradorServicio;
@@ -20,7 +21,7 @@ public class AdminTeatroConverter implements Converter<AdministradorTeatro> {
 
         AdministradorTeatro administradorTeatro;
         try {
-            administradorTeatro = administradorServicio.obtenerAdministrador(Integer.parseInt(value));
+            administradorTeatro = administradorServicio.obtenerAdministrador(String.valueOf(value));
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -30,7 +31,7 @@ public class AdminTeatroConverter implements Converter<AdministradorTeatro> {
     @Override
     public String getAsString(FacesContext context, UIComponent component, AdministradorTeatro value) {
         if(value != null){
-            return ""+value.getCedula();
+            return ""+value.getCodigo();
         }
         return "";
     }

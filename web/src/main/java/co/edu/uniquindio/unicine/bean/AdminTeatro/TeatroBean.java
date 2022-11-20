@@ -3,8 +3,8 @@ package co.edu.uniquindio.unicine.bean.AdminTeatro;
 import co.edu.uniquindio.unicine.entidades.AdministradorTeatro;
 import co.edu.uniquindio.unicine.entidades.Ciudad;
 import co.edu.uniquindio.unicine.entidades.Teatro;
-import co.edu.uniquindio.unicine.servicios.AdminTeatroServicio;
 import co.edu.uniquindio.unicine.servicios.AdministradorServicio;
+import co.edu.uniquindio.unicine.servicios.AdministradorTeatroService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class TeatroBean implements Serializable {
     private boolean editar;
 
     @Autowired
-    private AdminTeatroServicio adminTeatroServicio;
+    private AdministradorTeatroService adminTeatroServicio;
 
     @Autowired
     private AdministradorServicio administradorServicio;
@@ -62,7 +62,7 @@ public class TeatroBean implements Serializable {
     public void registrarTeatro(){
         try {
             if (!editar) {
-                teatro.setAdministrador(null);
+                teatro.setAdministradorTeatro(null);
                 Teatro registro = adminTeatroServicio.crearTeatros(teatro);
                 teatros.add(teatro);
 
@@ -87,7 +87,7 @@ public class TeatroBean implements Serializable {
 
         try {
             for (Teatro teatro : teatrosSeleccionados){
-                adminTeatroServicio.eliminarTeatros(teatro.getNit());
+                adminTeatroServicio.eliminarTeatros(teatro.getCodigo());
                 teatros.remove(teatro);
             }
             teatrosSeleccionados.clear();
