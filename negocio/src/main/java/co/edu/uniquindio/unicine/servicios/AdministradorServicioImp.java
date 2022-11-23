@@ -187,8 +187,8 @@ public class AdministradorServicioImp implements AdministradorServicio
     {
         return administradorTeatroRepo.findByCorreo(correo).equals(correo);
     }
-    private boolean AdministradorRepetido(Integer cedula){
-        return administradorTeatroRepo.findByCedula(cedula).orElse(null)!=null;
+    private boolean AdministradorRepetido(Integer codigo){
+        return administradorTeatroRepo.findByCodigo(codigo).orElse(null)!=null;
     }
 
     /**
@@ -200,7 +200,7 @@ public class AdministradorServicioImp implements AdministradorServicio
     public AdministradorTeatro actualizarAdministradorTeatros(AdministradorTeatro administradorTeatro) throws Exception
     {
 
-        Optional<AdministradorTeatro> administradorGuardado = administradorTeatroRepo.findById(administradorTeatro.getCodigo());
+        Optional<AdministradorTeatro> administradorGuardado = administradorTeatroRepo.findByCodigo(administradorTeatro.getCodigo());
         if(administradorGuardado.isEmpty())
         {
             throw new Exception("El administrador NO EXISTE");

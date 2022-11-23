@@ -24,6 +24,6 @@ public interface AdministradorTeatroRepo extends JpaRepository<AdministradorTeat
 
 
     //Esta consulta validad si existe un administradorTeatro ingresando la cedula
-    Optional<AdministradorTeatro> findByCedula(Integer cedula);
+    Optional<AdministradorTeatro> findByCodigo(Integer codigo);
 
 }

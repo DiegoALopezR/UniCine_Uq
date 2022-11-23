@@ -24,7 +24,7 @@ public class AdministradorTeatro implements Serializable {
 
     //PK
     @Id
-    private String codigo;
+    private Integer codigo;
     @Column(nullable = false)
     private String correo;
     @Column(nullable = false)
@@ -35,7 +35,7 @@ public class AdministradorTeatro implements Serializable {
     @OneToMany(mappedBy="administradorTeatro")
     private List<Teatro> teatros;
 
-    public AdministradorTeatro(String codigo, String correo, String password)
+    public AdministradorTeatro(Integer codigo, String correo, String password)
     {
         this.codigo = codigo;
         this.correo = correo;
